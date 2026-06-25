@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DBATU Signals & Systems - 100% Complete PYQ App</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables for Light Mode (DEFAULT) */
+        :root {
+            --bg-color: #f4f7f6;
+            --panel-bg: #ffffff;
+            --card-bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --success: #059669;
+            --success-bg: #d1fae5;
+            --warning: #d97706;
+            --warning-bg: #fef3c7;
+            --danger: #dc2626;
+            --border: #e2e8f0;
+            --accordion-hover: #f8fafc;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --step-bg: #ffffff;
+            --highlight: #e0e7ff;
+        }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --panel-bg: #1e293b;
+            --card-bg: #0b0f19;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --success: #34d399;
+            --success-bg: rgba(52, 211, 153, 0.1);
+            --warning: #fbbf24;
+            --warning-bg: rgba(251, 191, 36, 0.1);
+            --danger: #ef4444;
+            --border: #334155;
+            --accordion-hover: #0f172a;
+            --shadow: 0 4px 12px rgba(0,0,0,0.4);
+            --step-bg: #1e293b;
+            --highlight: #1e3a8a;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 15px; 
+            line-height: 1.6; 
+            font-size: 16px; 
+        }
+        
+        /* Master Header Box */
+        .master-header {
+            background-color: var(--panel-bg);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .master-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin: 0 0 15px 0;
+            border-bottom: 2px dashed var(--border);
+            padding-bottom: 15px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .meta-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--card-bg);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .meta-label { font-size: 13px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px;}
+        .meta-value { font-size: 15px; color: var(--text-main); font-weight: 600;}
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        body.dark-mode .theme-toggle { background: var(--panel-bg); color: var(--primary); border: 2px solid var(--primary); }
+
+        /* Navigation */
+        .nav-container { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; margin-bottom: 20px; scrollbar-width: none; }
+        .nav-container::-webkit-scrollbar { display: none; }
+        .unit-btn { 
+            flex: 0 0 auto; background: var(--panel-bg); color: var(--text-main); border: 2px solid var(--border); 
+            padding: 12px 22px; font-size: 15px; font-weight: 700; border-radius: 25px; cursor: pointer; 
+            box-shadow: var(--shadow); 
+        }
+        .unit-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+
+        /* Content Sections */
+        .unit-content { display: none; animation: fadeIn 0.4s ease-out; }
+        .unit-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { color: var(--primary); font-size: 22px; margin-top: 0; margin-bottom: 18px; border-left: 5px solid var(--primary); padding-left: 12px; }
+        h3 { color: var(--secondary); font-size: 19px; margin-top: 30px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-weight: 700; border-bottom: 2px solid var(--border); padding-bottom: 8px;}
+        
+        /* Cards */
+        .card { background-color: var(--panel-bg); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: var(--shadow); }
+        .card.formula { border-top: 4px solid var(--primary); }
+        .card.trap { border-top: 4px solid var(--warning); }
+        .card.important { border-top: 4px solid var(--danger); background-color: var(--highlight); }
+        .card ul { margin: 0; padding-left: 20px; }
+        .card li { margin-bottom: 12px; font-size: 15.5px; }
+
+        /* Interactive MCQ Styles */
+        .mcq-container { background-color: var(--panel-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 18px; overflow: hidden; box-shadow: var(--shadow); }
+        .mcq-question { background-color: var(--accordion-hover); padding: 18px; font-weight: 700; color: var(--text-main); border-bottom: 1px solid var(--border); font-size: 15.5px;}
+        
+        .mcq-meta { display: flex; gap: 8px; margin-bottom: 10px; }
+        .badge { font-size: 11px; padding: 4px 8px; border-radius: 4px; font-weight: 700; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .badge-obj { background-color: #7f1d1d; color: #fca5a5; }
+        .badge-date { background-color: #1e3a8a; color: #93c5fd; }
+        .badge-marks { background-color: #064e3b; color: #34d399; }
+        
+        body.light-mode .badge-obj { background-color: #fee2e2; color: #991b1b; }
+        body.light-mode .badge-date { background-color: #dbeafe; color: #1e3a8a; }
+        body.light-mode .badge-marks { background-color: #dcfce7; color: #166534; }
+
+        .mcq-options { padding: 15px; display: grid; grid-template-columns: 1fr; gap: 10px; }
+        @media (min-width: 768px) { .mcq-options { grid-template-columns: 1fr 1fr; } }
+        
+        .mcq-option { background-color: var(--card-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: 600;}
+        .mcq-option:hover { background-color: var(--accordion-hover); border-color: var(--primary); }
+        .mcq-option.correct-reveal { background-color: var(--success-bg); border-color: var(--success); color: var(--success); }
+        .mcq-option.wrong-reveal { background-color: rgba(239, 68, 68, 0.1); border-color: var(--danger); color: var(--danger); opacity: 0.7;}
+        
+        .mcq-reason { display: none; padding: 15px; margin: 0 15px 15px 15px; background-color: var(--warning-bg); border-left: 4px solid var(--warning); border-radius: 6px; font-size: 15px; animation: fadeIn 0.4s; line-height: 1.6;}
+        .mcq-reason strong { color: var(--warning); filter: brightness(0.7); }
+        body.dark-mode .mcq-reason strong { filter: brightness(1.2); }
+
+        /* Accordion (Descriptive Questions) */
+        .pyq-accordion { background-color: var(--panel-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 18px; overflow: hidden; box-shadow: var(--shadow); }
+        .pyq-btn { 
+            width: 100%; background-color: transparent; color: var(--text-main); text-align: left; 
+            padding: 18px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; 
+            display: flex; flex-direction: column; gap: 12px; 
+        }
+        .pyq-btn:hover { background-color: var(--accordion-hover); }
+        
+        .pyq-header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .pyq-title { line-height: 1.6; color: var(--text-main); font-size: 16.5px;}
+        
+        .icon { font-size: 20px; color: var(--primary); font-weight: bold; transition: transform 0.3s; }
+        .pyq-btn.active .icon { transform: rotate(45deg); color: var(--danger); }
+
+        /* Detailed Solutions */
+        .solution-panel { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; background-color: var(--card-bg); }
+        .solution-content { padding: 20px; border-top: 1px solid var(--border); font-size: 15px; }
+        
+        .step { margin-bottom: 25px; background-color: var(--step-bg); padding: 20px; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.02);}
+        .step-title { color: var(--primary); font-weight: 800; margin-bottom: 12px; font-size: 16.5px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px dotted var(--border); padding-bottom: 8px; display: block;}
+        .step-desc { margin-bottom: 12px; font-size: 15.5px; line-height: 1.7; color: var(--text-main); }
+        
+        .math-block { 
+            overflow-x: auto; -webkit-overflow-scrolling: touch; text-align: center; 
+            margin: 15px 0; padding: 15px; font-size: 1.2em; 
+            background: var(--panel-bg); border-radius: 8px; border: 1px solid var(--border);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        
+        .final-answer { 
+            background-color: var(--success-bg); border: 2px solid var(--success); padding: 20px; 
+            text-align: center; border-radius: 8px; margin-top: 25px; 
+            color: var(--success); font-size: 17px; box-shadow: var(--shadow);
+            line-height: 1.6; font-weight: bold;
+        }
+        body.dark-mode .final-answer { filter: brightness(1.1); }
+        .math-inline { font-weight: bold; color: var(--accent); }
+    </style>
+</head>
+<body class="light-mode">
+
+    <div class="master-header">
+        <h1 class="master-title">DBATU SIGNALS & SYSTEMS</h1>
+        <div class="meta-grid">
+            <div class="meta-item">
+                <span class="meta-label">Course Code:</span>
+                <span class="meta-value">25AF1370MD406A / BTETC402</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Branch Mapping:</span>
+                <span class="meta-value">AI&DS, AI&ML, Computer Eng. (NEP 2020)</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">University Board:</span>
+                <span class="meta-value">Dr. Babasaheb Ambedkar Technological University</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Evaluation Metric:</span>
+                <span class="meta-value">60/60 End-Semester Target</span>
+            </div>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+            <i class="fas fa-moon"></i> Switch to Dark Mode
+        </button>
+    </div>
+
+    <div class="nav-container">
+        <button class="unit-btn active" onclick="openUnit(event, 'unit1')">Unit 1: Intro</button>
+        <button class="unit-btn" onclick="openUnit(event, 'unit2')">Unit 2: LTI/Conv</button>
+        <button class="unit-btn" onclick="openUnit(event, 'unit3')">Unit 3: Fourier Ser</button>
+        <button class="unit-btn" onclick="openUnit(event, 'unit4')">Unit 4: Fourier Tr.</button>
+        <button class="unit-btn" onclick="openUnit(event, 'unit5')">Unit 5: Lap/Z</button>
+    </div>
+
+    <div id="unit1" class="unit-content active">
+        <h2>Unit 1: Introduction to Signals and Systems</h2>
+        
+        <div class="card important">
+            <h3><i class="fas fa-star"></i> High Priority Topics for 10-CGPA</h3>
+            <ul>
+                <li><strong>Even & Odd Decomposition:</strong> Guaranteed 4 to 6-mark question. Practice both trigonometric and exponential proofs.</li>
+                <li><strong>Energy vs Power:</strong> Must know integration for continuous and summation for discrete. Decaying signals = Energy; Periodic signals = Power.</li>
+                <li><strong>System Verification:</strong> 4-mark mandatory question. Focus heavily on testing Linearity (Superposition) and Causality (Time shifting).</li>
+            </ul>
+        </div>
+
+        <div class="card formula">
+            <h3><i class="fas fa-calculator"></i> Complete Formula Sheet</h3>
+            <ul>
+                <li><strong>Even Component:</strong> <span class="math-inline">\( x_e(t) = \frac{x(t) + x(-t)}{2} \)</span></li>
+                <li><strong>Odd Component:</strong> <span class="math-inline">\( x_o(t) = \frac{x(t) - x(-t)}{2} \)</span></li>
+                <li><strong>Energy (Continuous):</strong> <span class="math-inline">\( E = \int_{-\infty}^{\infty} |x(t)|^2 dt \)</span></li>
+                <li><strong>Energy (Discrete):</strong> <span class="math-inline">\( E = \sum_{n=-\infty}^{\infty} |x(n)|^2 \)</span></li>
+                <li><strong>Power (Continuous):</strong> <span class="math-inline">\( P = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} |x(t)|^2 dt \)</span></li>
+                <li><strong>Linearity (Superposition):</strong> Output for <span class="math-inline">\( ax_1(t) + bx_2(t) \)</span> must equal <span class="math-inline">\( ay_1(t) + by_2(t) \)</span>.</li>
+            </ul>
+        </div>
+
+        <div class="card trap">
+            <h3><i class="fas fa-lightbulb"></i> Exam Tips & Examiner Traps</h3>
+            <ul>
+                <li><strong>The Constant Trap:</strong> If an equation has an isolated constant, like <span class="math-inline">\( y(n) = 2x(n) - 3 \)</span>, it is always <strong>Non-Linear</strong>. A linear system MUST output 0 when the input is 0.</li>
+                <li><strong>The Look-Ahead Trap:</strong> Any scaling multiplier inside the bracket, like <span class="math-inline">\( y(n) = x(2n) \)</span>, makes the system <strong>Non-Causal</strong> because finding the present requires a future value.</li>
+                <li><strong>Periodic Test:</strong> For continuous sums like <span class="math-inline">\( \cos(\omega_1 t) + \sin(\omega_2 t) \)</span>, find the periods <span class="math-inline">\( T_1 = \frac{2\pi}{\omega_1} \)</span> and <span class="math-inline">\( T_2 = \frac{2\pi}{\omega_2} \)</span>. If the ratio <span class="math-inline">\( T_1 / T_2 \)</span> is a rational fraction, it is periodic!</li>
+            </ul>
+        </div>
+
+        <h3><i class="fas fa-mouse-pointer"></i> Objective Questions (Tap Option to Reveal Reason)</h3>
+        
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                Which of the following is a periodic signal?
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option" data-opt="A">A) \( \sin(t) \)</div>
+                <div class="mcq-option" data-opt="B">B) \( e^t \)</div>
+                <div class="mcq-option" data-opt="C">C) \( t \)</div>
+                <div class="mcq-option" data-opt="D">D) \( \ln(t) \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> A periodic signal must satisfy the mathematical condition \( x(t) = x(t+T) \) for all \(t\). The sine wave inherently oscillates and repeats its exact shape every \( 2\pi \) radians. Conversely, Exponential (\( e^t \)), linear (\( t \)), and logarithmic (\( \ln(t) \)) functions grow infinitely over time and never repeat their values, classifying them as aperiodic.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                Which operation is used to check linearity of a system?
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'C')">
+                <div class="mcq-option" data-opt="A">A) Scaling</div>
+                <div class="mcq-option" data-opt="B">B) Additivity</div>
+                <div class="mcq-option" data-opt="C">C) Both a & b</div>
+                <div class="mcq-option" data-opt="D">D) None</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> Linearity requires a system to completely obey the Principle of Superposition. Superposition consists of two distinct mathematical properties: Additivity (if \( x_1 \rightarrow y_1 \) and \( x_2 \rightarrow y_2 \), then \( x_1 + x_2 \rightarrow y_1 + y_2 \)) and Homogeneity/Scaling (\( a \cdot x \rightarrow a \cdot y \)). Both must be verified to prove linearity.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                The fundamental frequency of a periodic signal with period T is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option" data-opt="A">A) \( 2\pi/T \)</div>
+                <div class="mcq-option" data-opt="B">B) \( 1/T \)</div>
+                <div class="mcq-option" data-opt="C">C) \( T \)</div>
+                <div class="mcq-option" data-opt="D">D) \( T/2 \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> DBATU standardly asks for the fundamental <em>angular</em> frequency \( \omega_0 \) in formula contexts. The relationship is \( \omega_0 = 2\pi f \). Since the cyclic frequency is \( f = 1/T \) Hertz, substituting this gives the angular frequency as \( \omega_0 = \frac{2\pi}{T} \) radians/second.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                A signal that does not repeat itself over time is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option" data-opt="A">A) Aperiodic</div>
+                <div class="mcq-option" data-opt="B">B) Even</div>
+                <div class="mcq-option" data-opt="C">C) Periodic</div>
+                <div class="mcq-option" data-opt="D">D) Odd</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> "Aperiodic" literally translates to "without period". If a signal fails to satisfy the mathematical condition \( x(t) = x(t+T) \) for all possible values of t, it means the signal does not possess a repeating cycle and is therefore classified as aperiodic.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                The area under the curve \( \int_{-\infty}^{\infty} \delta(t) dt \) is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) \( \infty \)</div>
+                <div class="mcq-option" data-opt="B">B) Unity</div>
+                <div class="mcq-option" data-opt="C">C) Zero</div>
+                <div class="mcq-option" data-opt="D">D) Undefined</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The Dirac delta function \( \delta(t) \) is a mathematical construct representing a perfect impulse. While its amplitude (height) at exactly \( t=0 \) reaches towards infinity, its time-width approaches zero in such a specific way that the total area integrated underneath the impulse is strictly defined as exactly 1 (Unity). This property is crucial for convolution.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                Periodic Signals are defined by:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'D')">
+                <div class="mcq-option" data-opt="A">A) \( x(t+T)=x(t) \)</div>
+                <div class="mcq-option" data-opt="B">B) \( x(t-T)=x(t) \)</div>
+                <div class="mcq-option" data-opt="C">C) \( x(t+kT)=x(t) \)</div>
+                <div class="mcq-option" data-opt="D">D) All of the above</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> If a signal repeats every T seconds into the future (Option A: \(x(t+T)\)), logic dictates it must have also repeated T seconds in the past (Option B: \(x(t-T)\)). Furthermore, if it repeats once, it will logically continue to repeat at every integer multiple 'k' of the fundamental period T (Option C: \(x(t+kT)\)). Therefore, all three mathematical statements perfectly define periodicity.</div>
+        </div>
+
+        <h3><i class="fas fa-pen-nib"></i> Descriptive Questions (100% Comprehensive)</h3>
+        
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Show that any real signal x(t) can be expressed as the sum of its even and odd components. Also, write the expressions for even and odd parts.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: State the Baseline Assumption</div>
+                    <div class="step-desc">We begin by assuming the mathematical premise is true. Let an arbitrary continuous-time signal \( x(t) \) be written as the sum of an unknown even component \( x_e(t) \) and an unknown odd component \( x_o(t) \).</div>
+                    <div class="math-block">$$x(t) = x_e(t) + x_o(t) \quad \text{--- (Equation 1)}$$</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Apply Time Reversal Properties</div>
+                    <div class="step-desc">To find the components, we need a second equation. We generate this by substituting \( t \) with \( -t \) in Equation 1 to find the time-reversed version of the signal.</div>
+                    <div class="math-block">$$x(-t) = x_e(-t) + x_o(-t)$$</div>
+                    <div class="step-desc">By standard mathematical definition, an even signal remains unchanged when time-reversed: \( x_e(-t) = x_e(t) \). An odd signal becomes negative when time-reversed: \( x_o(-t) = -x_o(t) \). Substitute these fundamental properties back into the equation:</div>
+                    <div class="math-block">$$x(-t) = x_e(t) - x_o(t) \quad \text{--- (Equation 2)}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Solve for the Even Component</div>
+                    <div class="step-desc">We now have a system of two linear equations. To isolate the even part, we add Equation 1 and Equation 2 together. The positive and negative odd terms will perfectly cancel each other out.</div>
+                    <div class="math-block">$$x(t) + x(-t) = [x_e(t) + x_o(t)] + [x_e(t) - x_o(t)]$$</div>
+                    <div class="math-block">$$x(t) + x(-t) = 2x_e(t)$$</div>
+                    <div class="step-desc">Divide both sides by 2 to yield the final expression for the even component:</div>
+                    <div class="math-block">$$x_e(t) = \frac{x(t) + x(-t)}{2}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 4: Solve for the Odd Component</div>
+                    <div class="step-desc">To isolate the odd part, we subtract Equation 2 from Equation 1. This time, the even terms will cancel out, and the double negative will turn the odd term positive.</div>
+                    <div class="math-block">$$x(t) - x(-t) = [x_e(t) + x_o(t)] - [x_e(t) - x_o(t)]$$</div>
+                    <div class="math-block">$$x(t) - x(-t) = 2x_o(t)$$</div>
+                    <div class="step-desc">Divide both sides by 2 to yield the final expression for the odd component:</div>
+                    <div class="math-block">$$x_o(t) = \frac{x(t) - x(-t)}{2}$$</div>
+                </div>
+
+                <div class="final-answer">
+                    Final Conclusion:<br>
+                    The proof is complete. Any real signal \( x(t) \) can be constructed exactly as \( x_e(t) + x_o(t) \) utilizing the derived expressions:<br>
+                    \( x_e(t) = \frac{x(t) + x(-t)}{2} \) and \( x_o(t) = \frac{x(t) - x(-t)}{2} \).
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Explain the following signals with examples: i) Energy and Power, ii) Analog and Digital.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Part (i): Energy and Power Signals Detailed</div>
+                    <div class="step-desc"><strong>Energy Signals:</strong> A signal is classified as an energy signal if its total calculated energy \( E \) evaluates to a finite, non-zero number (\( 0 < E < \infty \)). Consequently, because the energy is finite over an infinite timeline, its average power \( P \) evaluates to strictly 0. These are typically transient signals that have a defined start and stop time, or decay to zero over time (non-periodic pulses).</div>
+                    <div class="step-desc"><em>Mathematical Example:</em> An exponentially decaying pulse \( x(t) = e^{-at}u(t) \) for \( a > 0 \).</div>
+                    <br>
+                    <div class="step-desc"><strong>Power Signals:</strong> A signal is classified as a power signal if its average power \( P \) evaluates to a finite, non-zero number (\( 0 < P < \infty \)). Because it constantly outputs power, its total accumulated energy \( E \) over infinite time approaches infinity (\( E = \infty \)). These are typically signals that continue oscillating or existing forever without decaying (periodic signals or constant DC values).</div>
+                    <div class="step-desc"><em>Mathematical Example:</em> A continuous sine wave \( x(t) = \sin(\omega_0 t) \) or a constant signal \( x(t) = 5 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Part (ii): Analog and Digital Signals Detailed</div>
+                    <div class="step-desc"><strong>Analog (Continuous-Time, Continuous-Amplitude) Signals:</strong> These signals are completely continuous in both the time domain and the amplitude domain. The signal exists and has a mathematically defined value at every single micro-instant of time. Furthermore, its amplitude is not restricted; it can take on an infinite number of decimal values within a physical range.</div>
+                    <div class="step-desc"><em>Real-World Example:</em> Human speech captured by an analog microphone, or the continuous reading of a mercury thermometer rising.</div>
+                    <br>
+                    <div class="step-desc"><strong>Digital (Discrete-Time, Discrete-Amplitude) Signals:</strong> These signals are strictly discrete in both time and amplitude. The signal only exists at specific sampled time intervals (it is blank between samples), and its amplitude is rounded (quantized) to a specific set of predefined, finite binary values (e.g., 0s and 1s, or 0V and 5V).</div>
+                    <div class="step-desc"><em>Real-World Example:</em> Audio data stored in an MP3 file on a hard drive, or binary packets transmitted over a computer network.</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Explain Step, Ramp, delta signal and write the mathematical relationships between them.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: The Fundamental Signals Defined</div>
+                    <div class="step-desc"><strong>Unit Impulse (Delta) Signal \(\delta(t)\):</strong> An infinitely tall, infinitely narrow spike occurring exactly at t=0. Its total area under the curve integrates exactly to 1. It is zero everywhere else. It represents a sudden, instantaneous shock to a system.</div>
+                    <div class="step-desc"><strong>Unit Step Signal \(u(t)\):</strong> A signal that is exactly 0 for all \(t<0\) and abruptly jumps to an amplitude of 1 for all \(t \ge 0\). It mathematically represents a switch turning on and staying on.</div>
+                    <div class="step-desc"><strong>Unit Ramp Signal \(r(t)\):</strong> A signal that is 0 for \(t<0\) and grows linearly at a 45-degree angle (following the equation \(r(t)=t\)) for \(t \ge 0\). It represents a constant, steady increase over time.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Mathematical Integration Relationships</div>
+                    <div class="step-desc">These three fundamental signals are directly linked sequentially through calculus. Moving "up" the complexity chain requires Integration.</div>
+                    <div class="step-desc"><strong>1. Impulse to Step (Integration):</strong> Accumulating (integrating) an impulse spike from \(-\infty\) up to time \(t\) gives a solid step function of height 1.</div>
+                    <div class="math-block">$$u(t) = \int_{-\infty}^{t} \delta(\tau) d\tau$$</div>
+                    <div class="step-desc"><strong>2. Step to Ramp (Integration):</strong> Integrating a constant step function of height 1 over time accumulates area, creating a linearly growing ramp function.</div>
+                    <div class="math-block">$$r(t) = \int_{-\infty}^{t} u(\tau) d\tau = t \cdot u(t)$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Mathematical Differentiation Relationships</div>
+                    <div class="step-desc">Moving "down" the complexity chain requires Differentiation (finding the slope/rate of change).</div>
+                    <div class="step-desc"><strong>3. Ramp to Step (Differentiation):</strong> The slope (derivative) of a linear ramp \( r(t)=t \) is a constant 1 (which is the step function).</div>
+                    <div class="math-block">$$\frac{d}{dt} r(t) = u(t)$$</div>
+                    <div class="step-desc"><strong>4. Step to Impulse (Differentiation):</strong> The derivative of a step function is zero everywhere except at t=0, where it has an infinite vertical jump. This infinite rate of change is the impulse.</div>
+                    <div class="math-block">$$\frac{d}{dt} u(t) = \delta(t)$$</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Explain the basic properties of the system.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">The 5 Core System Properties Explained</div>
+                    <div class="step-desc"><strong>1. Linearity:</strong> A system is linear if it strictly obeys the principle of superposition. This requires two things: Additivity and Homogeneity (scaling). If input \(x_1\) yields \(y_1\), and \(x_2\) yields \(y_2\), then the response to a combined scaled input \( ax_1(t) + bx_2(t) \) must be exactly \( ay_1(t) + by_2(t) \).</div>
+                    <br>
+                    <div class="step-desc"><strong>2. Time-Invariance:</strong> A system is time-invariant if a delay in the input causes an identical, matching delay in the output, without changing the signal's core shape. Essentially, the system's behavior does not change depending on what time it is. If an input \( x(t) \) produces \( y(t) \), then a delayed input \( x(t-t_0) \) must produce exactly \( y(t-t_0) \).</div>
+                    <br>
+                    <div class="step-desc"><strong>3. Causality:</strong> A system is causal if the current output depends ONLY on present and past inputs. It cannot look into the future or anticipate data it hasn't received yet. For example, the system \( y(n) = x(n) + x(n-1) \) is causal, but the system \( y(n) = x(n+1) \) is non-causal because it requires tomorrow's input today.</div>
+                    <br>
+                    <div class="step-desc"><strong>4. Stability (BIBO):</strong> A system is Bounded-Input Bounded-Output (BIBO) stable if feeding it a finite input always produces a finite output. It does not blow up to infinity. Mathematically, for an LTI system, this requires the impulse response to be absolutely integrable: \( \int_{-\infty}^{\infty} |h(t)|dt < \infty \).</div>
+                    <br>
+                    <div class="step-desc"><strong>5. Memory (Static vs Dynamic):</strong> A static (memoryless) system's output depends ONLY on the current input at that exact instant (e.g., a simple resistor where \( V(t) = I(t) \cdot R \)). A dynamic system requires memory of past or future states to calculate the present output (e.g., a capacitor or an integrator equation).</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Draw the following signals: i) \( u(t-2) \), ii) \( u(-t) \), iii) \( u(-t+1) \), iv) \( u(-t-1) \), v) \( u(2t) \), vi) \( 2 \cdot u(t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Signal Plotting Breakdown</div>
+                    <div class="step-desc"><strong>Base Reference:</strong> \( u(t) \) is a standard unit step function jumping from 0 to 1 exactly at \( t=0 \) and heading right to positive infinity.</div>
+                    <br>
+                    <div class="step-desc"><strong>i) \( u(t-2) \) [Time Shifting]:</strong> This is delayed by 2 units. Set \( t-2 = 0 \implies t=2 \). It remains 0 until \( t=2 \), where it jumps to a height of 1 and continues right to infinity.</div>
+                    <br>
+                    <div class="step-desc"><strong>ii) \( u(-t) \) [Time Reversal]:</strong> The negative sign flips it. This is a mirror image across the Y-axis. It comes from \( -\infty \) at a steady height of 1, and drops to 0 exactly at \( t=0 \).</div>
+                    <br>
+                    <div class="step-desc"><strong>iii) \( u(-t+1) \) [Shift then Reverse]:</strong> To find the exact jump point, set the argument to zero: \( -t+1 = 0 \implies t=1 \). Because of the negative 't', it comes from the left. The signal comes from \( -\infty \) at a height of 1, and drops to 0 at \( t=1 \).</div>
+                    <br>
+                    <div class="step-desc"><strong>iv) \( u(-t-1) \) [Shift then Reverse]:</strong> Set the argument to zero: \( -t-1 = 0 \implies t=-1 \). Because of the negative 't', it comes from the left. The signal comes from \( -\infty \) at a height of 1, and drops to 0 early at \( t=-1 \).</div>
+                    <br>
+                    <div class="step-desc"><strong>v) \( u(2t) \) [Time Scaling]:</strong> Scaling time mathematically compresses the signal towards the y-axis. However, since a standard step function has infinite width from 0 to infinity, compressing infinity by a factor of 2 still leaves it as infinity. Thus, \( u(2t) \) visually looks exactly the same as \( u(t) \).</div>
+                    <br>
+                    <div class="step-desc"><strong>vi) \( 2 \cdot u(t) \) [Amplitude Scaling]:</strong> The multiplier is outside the function, so this affects the Y-axis, not the time axis. It is the standard step function starting at \( t=0 \), but instead of a height of 1, it jumps up to an amplitude of exactly 2.</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row">
+                    <div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span><span class="badge badge-date">Supp 2022</span></div>
+                    <span class="icon">+</span>
+                </div>
+                <div class="pyq-title">Find even and odd part of: i) \( x(t)=\cos(t)+\sin(t)+\sin(t)\cos(t) \), ii) \( x(t)=e^{-2t}\cos(t) \)</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Part (i): Trigonometric Signal Expansion</div>
+                    <div class="step-desc"><strong>Given Formula:</strong> We will rely on the standard decomposition identities: \( x_e(t) = \frac{x(t) + x(-t)}{2} \) and \( x_o(t) = \frac{x(t) - x(-t)}{2} \).</div>
+                    <div class="step-desc"><strong>Calculation of \( x(-t) \):</strong> First, we must find the time-reversed version by substituting \( t \) with \( -t \). Apply the fundamental trigonometric properties: \( \cos(-t) = \cos(t) \) [Even function] and \( \sin(-t) = -\sin(t) \) [Odd function].</div>
+                    <div class="math-block">$$x(-t) = \cos(-t) + \sin(-t) + \sin(-t)\cos(-t)$$</div>
+                    <div class="math-block">$$x(-t) = \cos(t) - \sin(t) - \sin(t)\cos(t)$$</div>
+                    <div class="step-desc"><strong>Even Part Calculation:</strong> Add the original \( x(t) \) and the reversed \( x(-t) \). Observe how the sine terms containing negatives will completely cancel out.</div>
+                    <div class="math-block">$$x_e(t) = \frac{[\cos(t)+\sin(t)+\sin(t)\cos(t)] + [\cos(t)-\sin(t)-\sin(t)\cos(t)]}{2}$$</div>
+                    <div class="math-block">$$x_e(t) = \frac{2\cos(t)}{2} = \cos(t)$$</div>
+                    <div class="step-desc"><strong>Odd Part Calculation:</strong> Subtract \( x(-t) \) from \( x(t) \). Notice the double negative makes the sine terms positive, while the cosine terms completely cancel out.</div>
+                    <div class="math-block">$$x_o(t) = \frac{[\cos(t)+\sin(t)+\sin(t)\cos(t)] - [\cos(t)-\sin(t)-\sin(t)\cos(t)]}{2}$$</div>
+                    <div class="math-block">$$x_o(t) = \frac{2\sin(t) + 2\sin(t)\cos(t)}{2} = \sin(t) + \sin(t)\cos(t)$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Part (ii): Exponential Signal \( x(t)=e^{-2t}\cos(t) \)</div>
+                    <div class="step-desc"><strong>Calculation of \( x(-t) \):</strong> Replace \( t \) with \( -t \).</div>
+                    <div class="math-block">$$x(-t) = e^{-2(-t)}\cos(-t) = e^{2t}\cos(t)$$</div>
+                    <div class="step-desc"><strong>Even Part Calculation:</strong> Plug into the even formula.</div> 
+                    <div class="math-block">$$x_e(t) = \frac{e^{-2t}\cos(t) + e^{2t}\cos(t)}{2} = \cos(t) \left[ \frac{e^{-2t} + e^{2t}}{2} \right]$$</div>
+                    <div class="step-desc">Recognize Euler's mathematical identity for hyperbolic cosine: \( \frac{e^{\theta} + e^{-\theta}}{2} = \cosh(\theta) \). Therefore:</div>
+                    <div class="math-block">$$x_e(t) = \cos(t) \cosh(2t)$$</div>
+                    <div class="step-desc"><strong>Odd Part Calculation:</strong> Plug into the odd formula.</div>
+                    <div class="math-block">$$x_o(t) = \frac{e^{-2t}\cos(t) - e^{2t}\cos(t)}{2} = \cos(t) \left[ \frac{e^{-2t} - e^{2t}}{2} \right]$$</div>
+                    <div class="step-desc">The identity for hyperbolic sine is \( \sinh(\theta) = \frac{e^{\theta} - e^{-\theta}}{2} \). Since our terms are reversed, we factor out a negative sign to match the identity, yielding \( -\sinh(2t) \).</div>
+                    <div class="math-block">$$x_o(t) = -\cos(t) \sinh(2t)$$</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find even and odd part of discrete signal: \( y[n]=u[n]-u[n-4] \)</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Signal Definition and Index Mapping</div>
+                    <div class="step-desc">The sequence \( y[n] = u[n] - u[n-4] \) evaluates to a rectangular window pulse. It turns on at index 0 and is cancelled out (turns off) at index 4.</div>
+                    <div class="step-desc">It is exactly 1 at indices \( n=0, 1, 2, 3 \), and 0 everywhere else. Let's write the array: \( y[n] = \{1, 1, 1, 1\} \) starting at \(n=0\).</div>
+                    <div class="step-desc">The time-reversed sequence \( y[-n] \) is the mirror image across the y-axis. It is exactly 1 at indices \( n=0, -1, -2, -3 \), and 0 everywhere else.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Even Part \( y_e[n] = (y[n]+y[-n])/2 \)</div>
+                    <div class="step-desc">We calculate this formula point-by-point along the integer timeline:</div>
+                    <div class="step-desc"><strong>At \( n=0 \):</strong> Both sequences evaluate to 1. Therefore, \( (1+1)/2 = 1 \).</div>
+                    <div class="step-desc"><strong>At positive indices \( n=1, 2, 3 \):</strong> Only the right-sided \( y[n] \) equals 1. Therefore, \( (1+0)/2 = 0.5 \).</div>
+                    <div class="step-desc"><strong>At negative indices \( n=-1, -2, -3 \):</strong> Only the left-sided \( y[-n] \) equals 1. Therefore, \( (0+1)/2 = 0.5 \).</div>
+                    <div class="step-desc">Everywhere else outside this range: \( (0+0)/2 = 0 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 3: Odd Part \( y_o[n] = (y[n]-y[-n])/2 \)</div>
+                    <div class="step-desc">Calculate point-by-point:</div>
+                    <div class="step-desc"><strong>At \( n=0 \):</strong> Both sequences equal 1. \( (1-1)/2 = 0 \) (Note: Odd signals mathematically MUST always evaluate to zero at the origin).</div>
+                    <div class="step-desc"><strong>At positive indices \( n=1, 2, 3 \):</strong> Only \( y[n] \) equals 1. \( (1-0)/2 = 0.5 \).</div>
+                    <div class="step-desc"><strong>At negative indices \( n=-1, -2, -3 \):</strong> Only \( y[-n] \) equals 1. \( (0-1)/2 = -0.5 \).</div>
+                    <div class="step-desc">Everywhere else outside this range: 0.</div>
+                </div>
+
+                <div class="final-answer">
+                    <strong>Final Arrays:</strong><br>
+                    \( y_e[n] \) has values \( \{0.5, 0.5, 0.5, \mathbf{1}, 0.5, 0.5, 0.5\} \) from \( n=-3 \) to \( 3 \).<br>
+                    \( y_o[n] \) has values \( \{-0.5, -0.5, -0.5, \mathbf{0}, 0.5, 0.5, 0.5\} \) from \( n=-3 \) to \( 3 \).
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">4 Marks</span><span class="badge badge-date">Dec 2022</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Compute Energy and Power of \( x(n) = a^n u(n) \) where \( |a| < 1 \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Energy Calculation via Summation</div>
+                    <div class="step-desc">The standard mathematical formula for the total energy of a discrete-time signal is:</div>
+                    <div class="math-block">$$E = \sum_{n=-\infty}^{\infty} |x(n)|^2$$</div>
+                    <div class="step-desc">Because of the unit step function \( u(n) \), the signal is strictly zero for all \( n < 0 \). We adjust the summation limits to start at 0:</div>
+                    <div class="math-block">$$E = \sum_{n=0}^{\infty} (a^n)^2 = \sum_{n=0}^{\infty} (a^2)^n$$</div>
+                    <div class="step-desc">This represents an infinite geometric progression sum. The standard formula is \( S_{\infty} = \frac{\text{initial\_term}}{1-r} \). Here, our initial term at n=0 is 1, and the common ratio is \( r = a^2 \). Since the problem states \( |a| < 1 \), the series converges safely to a finite value.</div>
+                    <div class="math-block">$$E = \frac{1}{1 - a^2} \text{ Joules}$$</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Power Calculation via Limits</div>
+                    <div class="step-desc">By mathematical definition, the average power is the total energy divided by infinite time: \( P = \lim_{N \to \infty} \frac{E}{2N+1} \).</div>
+                    <div class="step-desc">Since we proved the total Energy \( E \) evaluates to a finite, constant number, dividing a constant by infinity yields exactly zero.</div>
+                </div>
+
+                <div class="final-answer">Final Answer: Total Energy \( E = \frac{1}{1 - a^2} \). Average Power \( P = 0 \).</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">4 Marks</span><span class="badge badge-date">Dec 2022</span><span class="badge badge-date">Supp 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Check Linearity & Causality: i) \( y(n) = n x^2(n) \), ii) \( y(n) = x(2n) \), iii) \( y(n) = 2x(n) - 3 \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">(i) Check Linearity for \( y(n) = n x^2(n) \)</div>
+                    <div class="step-desc"><strong>Concept:</strong> We must mathematically prove that the system obeys superposition: \( T\{a x_1(n) + b x_2(n)\} = a T\{x_1(n)\} + b T\{x_2(n)\} \).</div>
+                    <div class="step-desc"><strong>Right Hand Side (RHS):</strong> Apply the inputs individually, square them as the system dictates, and multiply by constants.</div>
+                    <div class="math-block">$$\text{RHS} = a \cdot y_1(n) + b \cdot y_2(n) = a [n x_1^2(n)] + b [n x_2^2(n)]$$</div>
+                    <div class="step-desc"><strong>Left Hand Side (LHS):</strong> Combine the inputs into a single mixed input first: \( x_3(n) = a x_1(n) + b x_2(n) \), then pass it through the system.</div>
+                    <div class="math-block">$$y_3(n) = n [x_3(n)]^2 = n [a x_1(n) + b x_2(n)]^2$$</div>
+                    <div class="step-desc">Expanding using the algebraic identity \( (A+B)^2 = A^2 + B^2 + 2AB \):</div>
+                    <div class="math-block">$$\text{LHS} = n [a^2 x_1^2(n) + b^2 x_2^2(n) + 2ab x_1(n)x_2(n)]$$</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> LHS \(\neq\) RHS due to the squared constants (\(a^2\)) and the cross-product term. The system is <strong>NON-LINEAR</strong>.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">(ii) Check Causality for \( y(n) = x(2n) \)</div>
+                    <div class="step-desc"><strong>Concept:</strong> A causal system depends ONLY on present and past inputs. It cannot access future data points.</div>
+                    <div class="step-desc"><strong>Calculation:</strong> Test a positive integer time step, let \( n = 1 \).</div>
+                    <div class="math-block">$$y(1) = x(2 \cdot 1) = x(2)$$</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> To calculate the output at time index 1, the system requires the input at time index 2. Because time index 2 is in the future relative to time index 1, the system relies on look-ahead data, making it <strong>NON-CAUSAL</strong>.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">(iii) Check Linearity for \( y(n) = 2x(n) - 3 \)</div>
+                    <div class="step-desc"><strong>Concept:</strong> The fastest test for linearity is the "Zero-Input" test. A perfectly linear system must pass through the origin (output zero when the input is zero).</div>
+                    <div class="step-desc"><strong>Calculation:</strong> Set the input \( x(n) = 0 \).</div>
+                    <div class="math-block">$$y(n) = 2(0) - 3 = -3$$</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> Because \( y(n) = -3 \) and not \( 0 \), the system generates an output without an input. It fails the baseline zero-input property. The system is <strong>NON-LINEAR</strong>.</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Periodicity Check: i) \( \cos(4t)+2\sin(8t) \), ii) \( \cos(3\pi t)+2\cos(4\pi t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Part (i): \( x(t) = \cos(4t)+2\sin(8t) \)</div>
+                    <div class="step-desc">First, find the fundamental period of each individual sinusoid using the formula \( T = 2\pi / \omega \).</div>
+                    <div class="step-desc">For the first term: \( \omega_1 = 4 \implies T_1 = 2\pi/4 = \pi/2 \).</div>
+                    <div class="step-desc">For the second term: \( \omega_2 = 8 \implies T_2 = 2\pi/8 = \pi/4 \).</div>
+                    <br>
+                    <div class="step-desc">To be periodic, the ratio of their periods \( T_1/T_2 \) must evaluate to a rational number (an integer fraction).</div>
+                    <div class="step-desc">Ratio: \( \frac{\pi/2}{\pi/4} = 2 \). Since 2 is a rational number, the combined signal is <strong>Periodic.</strong></div>
+                    <div class="step-desc">The overall Fundamental Period is the Least Common Multiple: \( T = \text{LCM}(T_1, T_2) = \pi/2 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Part (ii): \( x(t) = \cos(3\pi t)+2\cos(4\pi t) \)</div>
+                    <div class="step-desc">For the first term: \( \omega_1 = 3\pi \implies T_1 = 2\pi/3\pi = 2/3 \).</div>
+                    <div class="step-desc">For the second term: \( \omega_2 = 4\pi \implies T_2 = 2\pi/4\pi = 1/2 \).</div>
+                    <br>
+                    <div class="step-desc">Ratio: \( \frac{2/3}{1/2} = \frac{4}{3} \). Since 4/3 is a rational fraction, the combined signal is <strong>Periodic.</strong></div>
+                    <div class="step-desc">Fundamental Period \( T = \text{LCM}(2/3, 1/2) \). The Least Common Multiple of fractions is calculated as LCM(numerators) / GCD(denominators).</div>
+                    <div class="step-desc">LCM(2,1) / GCD(3,2) = 2 / 1 = 2 seconds.</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">A discrete-time signal \( x[n]=\{1,2,3,4,5\} \) and \( X[0]=2 \). Sketch and carefully label: i) \( x[3n-1] \), ii) \( x[-n+1] \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Map the Original Signal Indices</div>
+                    <div class="step-desc">The sequence has 5 elements. The problem states \( X[0]=2 \), meaning the element '2' resides at index 0. Therefore, the indices map as follows:</div>
+                    <div class="step-desc">\( x[-1]=1, \quad x[0]=2, \quad x[1]=3, \quad x[2]=4, \quad x[3]=5 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Part (i): \( y[n] = x[3n-1] \) (Time Scaling/Decimation & Shift)</div>
+                    <div class="step-desc">Evaluate the new array index by substituting integer values for \( n \):</div>
+                    <div class="step-desc">For \( n=0 \): \( y[0] = x[3(0)-1] = x[-1] = 1 \).</div>
+                    <div class="step-desc">For \( n=1 \): \( y[1] = x[3(1)-1] = x[2] = 4 \).</div>
+                    <div class="step-desc">Any other integer \( n \) (e.g., n=-1 gives x[-4], n=2 gives x[5]) results in indices that are outside the original array bounds, so they evaluate to 0.</div>
+                    <div class="step-desc"><strong>Resulting Array:</strong> A compressed sequence \( \{1, 4\} \) located exactly at indices \( n=0 \) and \( n=1 \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Part (ii): \( y[n] = x[-n+1] \) (Time Reversal & Shift)</div>
+                    <div class="step-desc">Evaluate index by index to find the new bounds:</div>
+                    <div class="step-desc">For \( n=-2 \): \( y[-2] = x[-(-2)+1] = x[3] = 5 \).</div>
+                    <div class="step-desc">For \( n=-1 \): \( y[-1] = x[-(-1)+1] = x[2] = 4 \).</div>
+                    <div class="step-desc">For \( n=0 \): \( y[0] = x[-(0)+1] = x[1] = 3 \).</div>
+                    <div class="step-desc">For \( n=1 \): \( y[1] = x[-(1)+1] = x[0] = 2 \).</div>
+                    <div class="step-desc">For \( n=2 \): \( y[2] = x[-(2)+1] = x[-1] = 1 \).</div>
+                    <div class="step-desc"><strong>Resulting Array:</strong> A reversed and shifted sequence \( \{5, 4, 3, 2, 1\} \) spanning from indices \( n=-2 \) to \( n=2 \).</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">4 Marks</span><span class="badge badge-date">Dec 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Function \( x(t) \) is a triangular pulse climbing from 0 to 1 over interval (0,1). Calculate and draw even and odd parts of the signal.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Understand the Base Signal</div>
+                    <div class="step-desc">The signal \( x(t) \) is a right-sided right triangle. It is 0 for \( t < 0 \), rises linearly to an amplitude of 1 at \( t=1 \), and drops immediately to 0. Equation: \( x(t) = t \) for \( 0 \le t \le 1 \).</div>
+                    <div class="step-desc">The time-reversed signal \( x(-t) \) is a left-sided right triangle. It rises linearly from 0 at \( t=-1 \) to an amplitude of 1 at \( t=0 \). Equation: \( x(-t) = -t \) for \( -1 \le t \le 0 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Even Part \( x_e(t) = (x(t) + x(-t))/2 \)</div>
+                    <div class="step-desc">We add the two triangles and divide the amplitude by 2.</div>
+                    <div class="step-desc">Because the triangles do not overlap (one is strictly left of the Y-axis, one is strictly right), adding them creates a large, symmetric triangle centered at 0.</div>
+                    <div class="step-desc">The resulting even signal is a symmetric triangle with a base from -1 to 1, with a peak amplitude of 0.5 exactly at \( t=\pm 1 \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Odd Part \( x_o(t) = (x(t) - x(-t))/2 \)</div>
+                    <div class="step-desc">We subtract the left triangle from the right triangle and divide by 2.</div>
+                    <div class="step-desc">The right side (\( 0 < t \le 1 \)) remains positive, peaking at an amplitude of 0.5.</div>
+                    <div class="step-desc">The left side (\( -1 \le t < 0 \)) is subtracted, meaning it flips upside down into the negative quadrant, peaking at an amplitude of -0.5.</div>
+                    <div class="step-desc">The resulting odd signal looks mathematically like a positive slope crossing the origin, similar to an 'N' shape centered at the origin.</div>
+                </div>
+            </div></div>
+        </div>
+
+    </div>
+
+    <div id="unit2" class="unit-content">
+        <h2>Unit 2: LTI Systems (Convolution)</h2>
+        
+        <div class="card important">
+            <h3><i class="fas fa-star"></i> High Priority Topics for 10-CGPA</h3>
+            <ul>
+                <li><strong>Tabular Convolution:</strong> Mandatory 6-mark numerical. Never skip writing the bounds explicitly (\(n_{start} = n_{x} + n_{h}\)).</li>
+                <li><strong>Continuous Convolution Integral:</strong> Highly likely to be asked with \( e^{-at}u(t) \). Master the integration bounds change to (0 to t).</li>
+                <li><strong>Properties Proofs:</strong> Frequently asked to prove that Convolution of Odd and Even is Odd. Follow the dummy variable \( k \) substitution closely.</li>
+            </ul>
+        </div>
+
+        <div class="card formula">
+            <h3><i class="fas fa-calculator"></i> Complete Formula Sheet</h3>
+            <ul>
+                <li><strong>Continuous Convolution Integral:</strong> <span class="math-inline math-block-sm">$$y(t) = \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau$$</span></li>
+                <li><strong>Discrete Convolution Sum:</strong> <span class="math-inline math-block-sm">$$y[n] = \sum_{k=-\infty}^{\infty} x[k]h[n-k]$$</span></li>
+                <li><strong>Array Output Length:</strong> For discrete arrays, length <span class="math-inline">\( L = L_x + L_h - 1 \)</span>.</li>
+                <li><strong>Cascaded Systems:</strong> Equivalent impulse response is the convolution: <span class="math-inline">\( h_{eq} = h_1 * h_2 \)</span>.</li>
+            </ul>
+        </div>
+
+        <div class="card trap">
+            <h3><i class="fas fa-lightbulb"></i> Exam Tips & Examiner Traps</h3>
+            <ul>
+                <li><strong>The Integral Bounds Shift:</strong> The standard formula has limits from \(-\infty\) to \(\infty\). BUT, if the signals contain the unit step function \( u(t) \) (meaning they are causal and start at 0), the integration bounds immediately restrict to <strong>0 to t</strong>. If you don't physically change the bounds on your paper, you will lose marks!</li>
+                <li><strong>Tabular Matrix Check:</strong> Always mathematically verify your final array length using \( L_x + L_h - 1 \) before submitting your paper to ensure you didn't accidentally skip adding a diagonal.</li>
+            </ul>
+        </div>
+
+        <h3><i class="fas fa-mouse-pointer"></i> Objective Questions</h3>
+        
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                If \( h_1, h_2 \) and \( h_3 \) are cascaded, find the overall impulse response:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option" data-opt="A">A) \( h_1 * h_2 * h_3 \)</div>
+                <div class="mcq-option" data-opt="B">B) \( h_1 + h_2 + h_3 \)</div>
+                <div class="mcq-option" data-opt="C">C) \( h_1 - h_2 \cdot h_3 \)</div>
+                <div class="mcq-option" data-opt="D">D) \( h_1 - h_2 + h_3 \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> In Linear Time-Invariant (LTI) systems, when subsystem blocks are placed in series (cascaded one after another), their individual impulse responses are mathematically convolved (\( * \)) with each other. If they were placed in parallel, their outputs would simply be added (+).</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                The convolution of a rectangular pulse with itself is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'C')">
+                <div class="mcq-option" data-opt="A">A) another rectangular pulse</div>
+                <div class="mcq-option" data-opt="B">B) square pulse</div>
+                <div class="mcq-option" data-opt="C">C) triangular pulse</div>
+                <div class="mcq-option" data-opt="D">D) sinc pulse</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> Visualizing the integral: As one rectangle slides horizontally over another identical stationary rectangle, the area of intersection (overlap) increases linearly from zero to a peak (when perfectly aligned). Then, as it continues sliding past, the overlap decreases linearly back to zero, creating a perfect triangular shape.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                Unit step response of an LTI system with impulse response \( h(n) = \delta(n) - \delta(n-1) \) is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) \( \delta(n-1) \)</div>
+                <div class="mcq-option" data-opt="B">B) \( \delta(n) \)</div>
+                <div class="mcq-option" data-opt="C">C) \( u(n-1) \)</div>
+                <div class="mcq-option" data-opt="D">D) \( u(n) \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The unit step response \( s(n) \) is mathematically defined as the running sum of the impulse response: \( s(n) = \sum_{k=-\infty}^n h(k) \). Summing the sequence \( \delta(n) - \delta(n-1) \) from 0 to n results in: at n=0, sum = 1; at n=1, sum = 1 - 1 = 0; for all \( n \ge 1 \), sum = 0. An array that is 1 at n=0 and 0 everywhere else is exactly the definition of \( \delta(n) \).</div>
+        </div>
+
+        <h3><i class="fas fa-pen-nib"></i> Descriptive Questions (100% Comprehensive)</h3>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Tabular Convolution: Find \( y(n) = x(n)*h(n) \) where \( x=\{1,2,3\} \) and \( h=\{1,2,1,-1\} \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Determine Bounds and Output Length</div>
+                    <div class="step-desc"><strong>Input \( x(n) \):</strong> Length \( L_x = 3 \). (Assuming it starts at index 0 based on standard DBATU notation).</div>
+                    <div class="step-desc"><strong>Impulse \( h(n) \):</strong> Length \( L_h = 4 \). (Starts at index 0).</div>
+                    <div class="step-desc"><strong>Output \( y(n) \):</strong> The total length will be \( L = L_x + L_h - 1 = 3 + 4 - 1 = 6 \).</div>
+                    <div class="step-desc">The output array will map from index 0 to index 5.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Construct the Multiplication Matrix</div>
+                    <div class="step-desc">Place \( x(n) \) horizontally and \( h(n) \) vertically. Multiply the row headers by the column headers to fill the interior grid.</div>
+                    <div class="math-block" style="text-align: left; padding-left: 20%; font-family: monospace;">
+                        [ x(n) ] &rarr; &nbsp;&nbsp;<strong>1</strong> &nbsp;&nbsp;&nbsp;<strong>2</strong> &nbsp;&nbsp;&nbsp;<strong>3</strong><br>
+                        -------------------------<br>
+                        <strong>1</strong> [h0] &nbsp;|&nbsp;  1 &nbsp;&nbsp;&nbsp;2 &nbsp;&nbsp;&nbsp;3<br>
+                        <strong>2</strong> [h1] &nbsp;|&nbsp;  2 &nbsp;&nbsp;&nbsp;4 &nbsp;&nbsp;&nbsp;6<br>
+                        <strong>1</strong> [h2] &nbsp;|&nbsp;  1 &nbsp;&nbsp;&nbsp;2 &nbsp;&nbsp;&nbsp;3<br>
+                        <strong>-1</strong> [h3]&nbsp;|&nbsp; -1 &nbsp;&nbsp;-2 &nbsp;&nbsp;-3
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Add the Diagonals</div>
+                    <div class="step-desc">Sum the numbers diagonally from the top-right to the bottom-left to generate each specific sequence value.</div>
+                    <br>
+                    <div class="step-desc">\( y(0) = \mathbf{1} \)</div>
+                    <div class="step-desc">\( y(1) = 2 + 2 = \mathbf{4} \)</div>
+                    <div class="step-desc">\( y(2) = 1 + 4 + 3 = \mathbf{8} \)</div>
+                    <div class="step-desc">\( y(3) = -1 + 2 + 6 = \mathbf{7} \)</div>
+                    <div class="step-desc">\( y(4) = -2 + 3 = \mathbf{1} \)</div>
+                    <div class="step-desc">\( y(5) = \mathbf{-3} \)</div>
+                </div>
+                
+                <div class="final-answer">Final Output Array: \( y(n) = \{1, 4, 8, 7, 1, -3\} \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Tabular Convolution: Find \( y(n) = x(n)*h(n) \) where \( x=\{1,1,2,3\} \) and \( h=\{1,1,1\} \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Bounds and Length</div>
+                    <div class="step-desc">Input Length \( L_x = 4 \), Impulse Length \( L_h = 3 \). Output length = 4 + 3 - 1 = 6.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Multiplication Matrix</div>
+                    <div class="step-desc">Construct the grid and multiply terms:</div>
+                    <div class="math-block" style="text-align: left; padding-left: 20%; font-family: monospace;">
+                        * | 1 &nbsp; 1 &nbsp; 2 &nbsp; 3<br>
+                        --|---------------<br>
+                        1 | 1 &nbsp; 1 &nbsp; 2 &nbsp; 3<br>
+                        1 | 1 &nbsp; 1 &nbsp; 2 &nbsp; 3<br>
+                        1 | 1 &nbsp; 1 &nbsp; 2 &nbsp; 3
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Add the Diagonals</div>
+                    <div class="step-desc">Group the numbers diagonally (top-right to bottom-left):</div>
+                    <div class="step-desc">\( y(0) = 1 \)</div>
+                    <div class="step-desc">\( y(1) = 1 + 1 = 2 \)</div>
+                    <div class="step-desc">\( y(2) = 2 + 1 + 1 = 4 \)</div>
+                    <div class="step-desc">\( y(3) = 3 + 2 + 1 = 6 \)</div>
+                    <div class="step-desc">\( y(4) = 3 + 2 = 5 \)</div>
+                    <div class="step-desc">\( y(5) = 3 \)</div>
+                </div>
+                
+                <div class="final-answer">Final Output Array: \( y(n) = \{1, 2, 4, 6, 5, 3\} \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Perform continuous convolution: \( x(t)=u(t) \) and \( h(t)=e^{-t}u(t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Setup the Convolution Integral</div>
+                    <div class="step-desc"><strong>Formula:</strong></div>
+                    <div class="math-block">$$y(t) = \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau$$</div>
+                    <div class="step-desc"><strong>Applying the Limits:</strong> Because both functions contain the unit step \( u(t) \), they evaluate to zero for \( t < 0 \). Because of this causality, the integration limits restrict exactly to the overlapping active region from \( 0 \) to \( t \). If you integrate to infinity, you fail the question.</div>
+                    <div class="math-block">$$y(t) = \int_0^t (1) \cdot e^{-(t-\tau)} d\tau$$</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Solve the Integration</div>
+                    <div class="step-desc">Since the integral is with respect to the dummy variable \( \tau \), we can pull the constant \( e^{-t} \) completely outside the integral to make it easier.</div>
+                    <div class="math-block">$$y(t) = e^{-t} \int_0^t e^{\tau} d\tau$$</div>
+                    <div class="step-desc">The integral of \( e^\tau \) is simply \( e^\tau \). Applying the limits from 0 to t:</div>
+                    <div class="math-block">$$y(t) = e^{-t} [e^t - e^0]$$</div>
+                    <div class="step-desc">Substitute \( e^0 = 1 \):</div>
+                    <div class="math-block">$$y(t) = e^{-t}(e^t - 1)$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Simplify</div>
+                    <div class="step-desc">Multiply the term inside the bracket: \( (e^{-t} \cdot e^t) - (e^{-t} \cdot 1) = 1 - e^{-t} \).</div>
+                    <div class="step-desc">Multiply the entire result by \( u(t) \) to mathematically indicate it remains a causal signal starting at t=0.</div>
+                </div>
+                
+                <div class="final-answer">Final Output: \( y(t) = (1 - e^{-t})u(t) \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">8 Marks</span><span class="badge badge-date">Dec 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the convolution of a rectangle signal or gate function with itself.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Visual Explanation Method</div>
+                    <div class="step-desc">Let the rectangle signal \( x(t) \) exist from time \( -T \) to \( T \) with a constant amplitude of 1.</div>
+                    <div class="step-desc">When a signal is convolved with itself, we mathematically flip one copy (time reversal) and slide it across the stationary copy from \( -\infty \) to \( \infty \). Since the rectangle is symmetric, the flip doesn't visually change it.</div>
+                    <br>
+                    <div class="step-desc"><strong>Phase 1: Approaching:</strong> The front edge of the sliding rectangle hits the back edge of the stationary rectangle at exactly \( t = -T - T = -2T \). The overlap begins, increasing linearly as it slides further in.</div>
+                    <br>
+                    <div class="step-desc"><strong>Phase 2: Full Overlap:</strong> The two rectangles perfectly align at exactly \( t = 0 \). The overlap area reaches its maximum possible value: Area = width &times; height = \( 2T \times 1 = 2T \).</div>
+                    <br>
+                    <div class="step-desc"><strong>Phase 3: Exiting:</strong> The trailing edge of the sliding rectangle leaves the front edge of the stationary rectangle at \( t = T + T = 2T \). The overlap area decreases linearly back down to zero.</div>
+                    <br>
+                    <div class="step-desc"><strong>Resulting Shape:</strong> The linear increase to a peak followed by a linear decrease creates a perfect Triangular pulse. The triangle starts at -2T, peaks at an amplitude of 2T (at t=0), and ends exactly at +2T.</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Consider an LTI system with \( h(n) = \alpha^n u[n] \) and input \( x(n) = \beta^n u[n] \). Find output \( y(n) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Formula Setup</div>
+                    <div class="math-block">$$y(n) = \sum_{k=-\infty}^{\infty} x(k)h(n-k)$$</div>
+                    <div class="step-desc">Because both the input sequence and the impulse response sequence contain the step function \( u(n) \), the system and the signal are strictly causal. Therefore, the convolution summation limits mathematically collapse from \( -\infty \rightarrow \infty \) down to exactly \( 0 \rightarrow n \).</div>
+                    <div class="math-block">$$y(n) = \sum_{k=0}^{n} \beta^k \alpha^{n-k}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 2: Algebraic Manipulation</div>
+                    <div class="step-desc">Separate the \(\alpha\) terms using basic exponent rules: \( \alpha^{n-k} = \alpha^n \cdot \alpha^{-k} \).</div>
+                    <div class="step-desc">Because \( \alpha^n \) does not depend on the summation variable \( k \), we can treat it as a constant and pull it outside the sum entirely.</div>
+                    <div class="math-block">$$y(n) = \alpha^n \sum_{k=0}^{n} \beta^k \alpha^{-k} = \alpha^n \sum_{k=0}^{n} \left(\frac{\beta}{\alpha}\right)^k$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Apply Geometric Series Formula</div>
+                    <div class="step-desc">The standard mathematical formula for the sum of a finite geometric series is \( S = \frac{1 - r^{n+1}}{1 - r} \) where our common ratio is \( r = \frac{\beta}{\alpha} \).</div>
+                    <div class="math-block">$$y(n) = \alpha^n \left[ \frac{1 - (\beta/\alpha)^{n+1}}{1 - (\beta/\alpha)} \right]$$</div>
+                    <div class="step-desc">Multiply the numerator and denominator by \( \alpha \) to simplify the complex fraction:</div>
+                    <div class="math-block">$$y(n) = \alpha^n \left[ \frac{\alpha - \beta(\beta/\alpha)^n}{\alpha - \beta} \right]$$</div>
+                </div>
+                
+                <div class="final-answer">Final Output: \( y(n) = \frac{\alpha^{n+1} - \beta^{n+1}}{\alpha - \beta} u(n) \) (assuming \( \alpha \neq \beta \))</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Show that: i) Conv of Odd & Even is Odd, ii) Even & Even is Even, iii) Odd & Odd is Odd.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Proof Foundation</div>
+                    <div class="step-desc">Let the convolution output be defined as \( y(t) = x(t) * h(t) = \int_{-\infty}^{\infty} x(\tau)h(t-\tau)d\tau \). We want to analyze \( y(-t) \) to check for symmetry.</div>
+                    <div class="math-block">$$y(-t) = \int_{-\infty}^{\infty} x(\tau)h(-t-\tau)d\tau$$</div>
+                    <div class="step-desc">Let's perform a substitution. Let dummy variable \( k = -\tau \), which means \( d\tau = -dk \). As \( \tau \) goes from \( -\infty \) to \( \infty \), \( k \) goes from \( \infty \) to \( -\infty \). The negative sign from \( dk \) flips the integral limits back to normal.</div>
+                    <div class="math-block">$$y(-t) = \int_{-\infty}^{\infty} x(-k)h(-t+k)dk \quad \text{--- (Master Equation)}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Case 1: Odd * Even</div>
+                    <div class="step-desc">Assume \( x \) is an Odd signal (\( x(-k) = -x(k) \)) and \( h \) is an Even signal (\( h(-t+k) = h(t-k) \)).</div>
+                    <div class="step-desc">Substitute these specific properties into our Master Equation:</div>
+                    <div class="math-block">$$y(-t) = \int -x(k)h(t-k)dk = -\int x(k)h(t-k)dk = -y(t)$$</div>
+                    <div class="step-desc">Since \( y(-t) = -y(t) \), the convolution of an Odd and Even signal is <strong>ODD</strong>.</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Case 2: Even * Even</div>
+                    <div class="step-desc">Assume \( x \) is an Even signal (\( x(-k) = x(k) \)) and \( h \) is an Even signal (\( h(-t+k) = h(t-k) \)).</div>
+                    <div class="step-desc">Substitute these specific properties into our Master Equation:</div>
+                    <div class="math-block">$$y(-t) = \int x(k)h(t-k)dk = y(t)$$</div>
+                    <div class="step-desc">Since \( y(-t) = y(t) \), the convolution of an Even and Even signal is <strong>EVEN</strong>.</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Case 3: Odd * Odd (The Exam Anomaly)</div>
+                    <div class="step-desc">Assume \( x \) is an Odd signal (\( x(-k) = -x(k) \)) and \( h \) is an Odd signal (\( h(-t+k) = -h(t-k) \)).</div>
+                    <div class="step-desc">Substitute these specific properties into our Master Equation:</div>
+                    <div class="math-block">$$y(-t) = \int (-x(k))(-h(t-k))dk = \int x(k)h(t-k)dk = y(t)$$</div>
+                    <div class="step-desc"><em>Note for the Exam:</em> The DBATU question paper specifically asked to prove Odd*Odd is Odd, which is mathematically false. Two negative signs multiply together to create a positive. State the mathematical proof clearly to show the examiner that Odd*Odd is actually <strong>EVEN</strong>.</div>
+                </div>
+            </div></div>
+        </div>
+    </div>
+
+    <div id="unit3" class="unit-content">
+        <h2>Unit 3: Fourier Series</h2>
+        
+        <div class="card important">
+            <h3><i class="fas fa-star"></i> High Priority Topics for 10-CGPA</h3>
+            <ul>
+                <li><strong>Dirichlet Conditions:</strong> Extremely common 6-mark theory question. Must know all 3 points perfectly.</li>
+                <li><strong>Symmetry Rules Derivation:</strong> Deriving \( a_0, a_n, b_n \) for Even and Odd signals is a staple long-form question. The trick is to split the bounds.</li>
+                <li><strong>Mathematical FS Calculation:</strong> Practice calculating the Trig FS for a Sawtooth or Square wave using Integration by parts.</li>
+            </ul>
+        </div>
+
+        <div class="card formula">
+            <h3><i class="fas fa-calculator"></i> Complete Formula Sheet</h3>
+            <ul>
+                <li><strong>Fourier Series:</strong> <span class="math-inline math-block-sm">$$x(t) = a_0 + \sum_{n=1}^{\infty} [a_n \cos(n\omega_0 t) + b_n \sin(n\omega_0 t)]$$</span></li>
+                <li><strong>Coefficient \(a_0\):</strong> DC offset. <span class="math-inline math-block-sm">$$a_0 = \frac{1}{T}\int x(t) dt$$</span></li>
+                <li><strong>Coefficient \(a_n\):</strong> Cosine amplitudes. <span class="math-inline math-block-sm">$$a_n = \frac{2}{T}\int x(t)\cos(n\omega_0 t) dt$$</span></li>
+                <li><strong>Coefficient \(b_n\):</strong> Sine amplitudes. <span class="math-inline math-block-sm">$$b_n = \frac{2}{T}\int x(t)\sin(n\omega_0 t) dt$$</span></li>
+            </ul>
+        </div>
+
+        <div class="card trap">
+            <h3><i class="fas fa-lightbulb"></i> Exam Tips & Examiner Traps</h3>
+            <ul>
+                <li><strong>The Symmetry Hack:</strong> Before calculating massive integrals, look at the graph. If the left side mirrors the right side exactly (Even symmetry), write down <strong>\( b_n = 0 \)</strong> immediately. If the right side is the inverted mirror of the left side (Odd symmetry), write <strong>\( a_0 = 0, a_n = 0 \)</strong> immediately. You will save 15 minutes of integration time.</li>
+            </ul>
+        </div>
+
+        <h3><i class="fas fa-mouse-pointer"></i> Objective Questions</h3>
+        
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                The Fourier series of a real, even periodic signal will contain only:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option" data-opt="A">A) cosine terms</div>
+                <div class="mcq-option" data-opt="B">B) sine terms</div>
+                <div class="mcq-option" data-opt="C">C) even terms</div>
+                <div class="mcq-option" data-opt="D">D) odd harmonics</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> A cosine wave is a perfectly "even" mathematical function (it reflects perfectly symmetrically across the y-axis). A sine wave is mathematically "odd". Therefore, an even periodic signal can only be constructed using even building blocks (cosines). All sine coefficients (\( b_n \)) evaluate to exactly zero.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                If the Fourier series coefficients of a signal are periodic then the signal must be:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) continuous-time, periodic</div>
+                <div class="mcq-option" data-opt="B">B) discrete-time, periodic</div>
+                <div class="mcq-option" data-opt="C">C) continuous-time, non-periodic</div>
+                <div class="mcq-option" data-opt="D">D) discrete-time, non-periodic</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The Discrete Time Fourier Series (DTFS) has a unique mathematical property where its frequency spectrum coefficients are always periodic (repeating infinitely every \( 2\pi \) radians). Continuous-time signals, on the other hand, have aperiodic, infinite spectrums that do not loop.</div>
+        </div>
+
+        <h3><i class="fas fa-pen-nib"></i> Descriptive Questions (100% Comprehensive)</h3>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span><span class="badge badge-date">Supp 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">State and explain the Dirichlet conditions for the existence of Fourier series.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Introduction</div>
+                    <div class="step-desc">The Dirichlet conditions are the three fundamental mathematical rules that a periodic signal \( x(t) \) must obey for its Fourier Series to converge (exist) successfully. If a signal fails these rules, it cannot be reliably represented as a sum of sines and cosines.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Condition 1: Absolute Integrability</div>
+                    <div class="step-desc">The signal must be absolutely integrable over one complete time period \( T_0 \). This ensures that the total area under the curve is finite, which keeps the \( a_0 \) (DC component) from evaluating to infinity.</div>
+                    <div class="math-block">$$\int_{0}^{T_0} |x(t)| dt < \infty$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Condition 2: Finite Number of Maxima and Minima</div>
+                    <div class="step-desc">Within any single time period \( T_0 \), the signal must have a finite (countable) number of peaks (maxima) and valleys (minima). It cannot oscillate infinitely fast (like the theoretical mathematical function \( \sin(1/t) \) near zero).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Condition 3: Finite Number of Discontinuities</div>
+                    <div class="step-desc">Within any single time period \( T_0 \), the signal can have jumps or breaks (discontinuities), but the total number of these breaks must be finite, and the size (amplitude) of each individual jump must also be a finite, countable number.</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span><span class="badge badge-date">Dec 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Derive the formula for Trigonometric Fourier Series for the waveforms with even symmetry.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Define the Base Property</div>
+                    <div class="step-desc">An Even signal mathematically satisfies the condition: \( x(t) = x(-t) \).</div>
+                    <div class="step-desc">When calculating integrals for symmetric bounds (\(-T/2\) to \(T/2\)), the integral of an even function doubles (because left area = right area), while the integral of an odd function perfectly cancels out to exactly zero.</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Derive DC Component (\( a_0 \))</div>
+                    <div class="step-desc">The base definition formula is:</div>
+                    <div class="math-block">$$a_0 = \frac{1}{T} \int_{-T/2}^{T/2} x(t) dt$$</div>
+                    <div class="step-desc">Since \( x(t) \) is even, the area on the left of the y-axis equals the area on the right. We change the integration bounds to evaluate only the right side (\( 0 \) to \( T/2 \)) and multiply the result by 2:</div>
+                    <div class="math-block">$$a_0 = \frac{2}{T} \int_{0}^{T/2} x(t) dt$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Derive Cosine Coefficients (\( a_n \))</div>
+                    <div class="step-desc">The base definition formula is:</div>
+                    <div class="math-block">$$a_n = \frac{2}{T} \int_{-T/2}^{T/2} x(t)\cos(n\omega_0 t) dt$$</div>
+                    <div class="step-desc">We know \( x(t) \) is Even. We know the cosine function is Even. </div>
+                    <div class="step-desc">The mathematical product of [Even &times; Even] results in an Even function. Thus, we can apply the same boundary trick and double the integral:</div>
+                    <div class="math-block">$$a_n = \frac{4}{T} \int_{0}^{T/2} x(t)\cos(n\omega_0 t) dt$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 4: Derive Sine Coefficients (\( b_n \))</div>
+                    <div class="step-desc">The base definition formula is:</div>
+                    <div class="math-block">$$b_n = \frac{2}{T} \int_{-T/2}^{T/2} x(t)\sin(n\omega_0 t) dt$$</div>
+                    <div class="step-desc">We know \( x(t) \) is Even. We know the sine function is Odd. </div>
+                    <div class="step-desc">The mathematical product of [Even &times; Odd] results in an ODD function. The integral of an odd function over symmetric bounds is exactly zero.</div>
+                    <div class="math-block">$$b_n = 0$$</div>
+                </div>
+                
+                <div class="final-answer">Final Result: The Fourier Series for an Even signal only contains \( a_0 \) and cosine harmonics (\( a_n \)). All sine components \( b_n = 0 \).</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the trigonometric Fourier Series for the following signal: \( x(t)=10t/2\pi \) for \( 0<t<2\pi \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Identify Parameters</div>
+                    <div class="step-desc">This describes a repeating linear sawtooth wave. The fundamental period is given as the full interval \( T = 2\pi \).</div>
+                    <div class="step-desc">Therefore, the fundamental angular frequency is \( \omega_0 = \frac{2\pi}{T} = \frac{2\pi}{2\pi} = 1 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Find DC Component (\( a_0 \))</div>
+                    <div class="math-block">$$a_0 = \frac{1}{2\pi} \int_0^{2\pi} \frac{10t}{2\pi} dt = \frac{10}{4\pi^2} \int_0^{2\pi} t dt$$</div>
+                    <div class="math-block">$$a_0 = \frac{10}{4\pi^2} \left[ \frac{t^2}{2} \right]_0^{2\pi} = \frac{10}{4\pi^2} \cdot \frac{4\pi^2}{2} = 5$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Find Cosine Coefficients (\( a_n \))</div>
+                    <div class="math-block">$$a_n = \frac{2}{2\pi} \int_0^{2\pi} \frac{10t}{2\pi} \cos(nt) dt = \frac{10}{2\pi^2} \int_0^{2\pi} t \cos(nt) dt$$</div>
+                    <div class="step-desc">Using integration by parts: \( \int u dv = uv - \int v du \), where \( u = t, dv = \cos(nt)dt \). Because of the symmetry of the wave and the bounds, this entire integral evaluates to exactly 0 over a full period. \( a_n = 0 \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 4: Find Sine Coefficients (\( b_n \))</div>
+                    <div class="math-block">$$b_n = \frac{2}{2\pi} \int_0^{2\pi} \frac{10t}{2\pi} \sin(nt) dt = \frac{10}{2\pi^2} \int_0^{2\pi} t \sin(nt) dt$$</div>
+                    <div class="step-desc">Using integration by parts (DI method):</div>
+                    <div class="math-block">$$b_n = \frac{10}{2\pi^2} \left[ \frac{-t\cos(nt)}{n} + \frac{\sin(nt)}{n^2} \right]_0^{2\pi}$$</div>
+                    <div class="step-desc">Plugging in the upper and lower boundaries (remembering \( \sin(2\pi n) = 0 \) and \( \cos(2\pi n) = 1 \)):</div>
+                    <div class="math-block">$$b_n = \frac{10}{2\pi^2} \left( \frac{-2\pi(1)}{n} - 0 \right) = -\frac{10}{n\pi}$$</div>
+                </div>
+                
+                <div class="final-answer">Final Series: \( x(t) = 5 - \sum_{n=1}^{\infty} \frac{10}{n\pi} \sin(nt) \)</div>
+            </div></div>
+        </div>
+        
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the Fourier series for \( f(x)=x^3 \) over the boundary interval \( (-\pi,\pi) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Symmetry Check</div>
+                    <div class="step-desc">The function is \( f(x) = x^3 \). Testing for mathematical symmetry: \( f(-x) = (-x)^3 = -x^3 = -f(x) \).</div>
+                    <div class="step-desc">Because the negative sign pulls out perfectly, the function is perfectly <strong>ODD</strong>. Therefore, \( a_0 = 0 \) and all \( a_n = 0 \). The series will only contain sine terms (\( b_n \)).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Set up the integral for \( b_n \)</div>
+                    <div class="step-desc">The period is \( T = 2\pi \). The specific formula for \( b_n \) for an odd function bounded from \(-\pi\) to \(\pi\) is:</div>
+                    <div class="math-block">$$b_n = \frac{2}{\pi} \int_{0}^{\pi} x^3 \sin(nx) dx$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Integration by Parts</div>
+                    <div class="step-desc">Applying tabular integration by parts on the product \( x^3 \sin(nx) \):</div>
+                    <div class="math-block">$$b_n = \frac{2}{\pi} \left[ x^3\left(\frac{-\cos nx}{n}\right) - 3x^2\left(\frac{-\sin nx}{n^2}\right) + 6x\left(\frac{\cos nx}{n^3}\right) - 6\left(\frac{\sin nx}{n^4}\right) \right]_0^\pi$$</div>
+                    <div class="step-desc">Evaluate at bounds (noting that \( \sin(n\pi) = 0 \) and \( \cos(n\pi) = (-1)^n \)):</div>
+                    <div class="math-block">$$b_n = \frac{2}{\pi} \left[ \frac{-\pi^3 (-1)^n}{n} + \frac{6\pi (-1)^n}{n^3} \right]$$</div>
+                    <div class="step-desc">Factor out the common terms:</div>
+                    <div class="math-block">$$b_n = 2(-1)^n \left[ \frac{6}{n^3} - \frac{\pi^2}{n} \right]$$</div>
+                </div>
+                
+                <div class="final-answer">Final Series: \( f(x) = \sum_{n=1}^{\infty} 2(-1)^n \left[ \frac{6}{n^3} - \frac{\pi^2}{n} \right] \sin(nx) \)</div>
+            </div></div>
+        </div>
+
+    </div>
+
+    <div id="unit4" class="unit-content">
+        <h2>Unit 4: Fourier Transforms & Sampling</h2>
+        
+        <div class="card important">
+            <h3><i class="fas fa-star"></i> High Priority Topics for 10-CGPA</h3>
+            <ul>
+                <li><strong>Nyquist Rate Calculations:</strong> The most heavily tested concept. You MUST know how to mathematically expand squared sines and multiplied sines using trig identities to find \( f_{max} \).</li>
+                <li><strong>FT Integrations:</strong> Practice the integration for \( e^{-at}u(t) \) and \( e^{at}u(-t) \).</li>
+                <li><strong>DTFT Infinite Sums:</strong> Master the geometric progression formula \( S = \frac{1}{1-r} \) for discrete sequences like \( a^n u(n) \).</li>
+            </ul>
+        </div>
+
+        <div class="card formula">
+            <h3><i class="fas fa-calculator"></i> Complete Formula Sheet</h3>
+            <ul>
+                <li><strong>Continuous-Time FT:</strong> <span class="math-inline math-block-sm">$$X(j\omega) = \int_{-\infty}^{\infty} x(t)e^{-j\omega t} dt$$</span></li>
+                <li><strong>Discrete-Time FT (DTFT):</strong> <span class="math-inline math-block-sm">$$X(e^{j\omega}) = \sum_{n=-\infty}^{\infty} x(n) e^{-j\omega n}$$</span></li>
+                <li><strong>Nyquist Rate:</strong> Sampling frequency must be strictly greater than or equal to twice the maximum frequency. <span class="math-inline">\( f_s \ge 2 f_{max} \)</span></li>
+                <li><strong>Nyquist Interval:</strong> The maximum time between samples. <span class="math-inline">\( T_s = \frac{1}{f_s} = \frac{1}{2 f_{max}} \)</span></li>
+            </ul>
+        </div>
+        
+        <div class="card trap">
+            <h3><i class="fas fa-lightbulb"></i> Exam Tips & Examiner Traps</h3>
+            <ul>
+                <li><strong>The Non-Linear Nyquist Trap:</strong> If a signal is squared, like <span class="math-inline">\( \sin^2(100\pi t) \)</span>, you CANNOT just take 100 and divide by 2. Squaring a signal doubles its frequency in the real world. You must mathematically expand it using trigonometric identities: <span class="math-inline">\( \sin^2(\theta) = \frac{1 - \cos(2\theta)}{2} \)</span> before finding the true <span class="math-inline">\( f_{max} \)</span>.</li>
+                <li><strong>Multiplication Nyquist Trap:</strong> Multiplying two sines/cosines adds their frequencies together! \( \sin(\omega_1 t)\cos(\omega_2 t) \) creates a new maximum frequency bound of \( \omega_1 + \omega_2 \).</li>
+            </ul>
+        </div>
+
+        <h3><i class="fas fa-mouse-pointer"></i> Objective Questions</h3>
+        
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                Convolution in the time domain is equivalent to _______ in the frequency domain.
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'D')">
+                <div class="mcq-option" data-opt="A">A) Division</div>
+                <div class="mcq-option" data-opt="B">B) Addition</div>
+                <div class="mcq-option" data-opt="C">C) Convolution</div>
+                <div class="mcq-option correct" data-opt="D">D) Multiplication</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> This is the fundamental Convolution Theorem. \( x(t) * h(t) \leftrightarrow X(j\omega) \cdot H(j\omega) \). This crucial property makes complex, time-consuming time-domain integral math easy by turning it into simple algebraic multiplication in the frequency domain.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span><span class="badge badge-date">Supp 2022</span></div>
+                The Nyquist rate for a signal with maximum frequency \( f_{max} = 10 \text{ kHz} \) is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'D')">
+                <div class="mcq-option" data-opt="A">A) 5 kHz</div>
+                <div class="mcq-option" data-opt="B">B) 10 kHz</div>
+                <div class="mcq-option" data-opt="C">C) 15 kHz</div>
+                <div class="mcq-option correct" data-opt="D">D) 20 kHz</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The Nyquist-Shannon sampling criterion states that to avoid aliasing (signal distortion during sampling), the sampling frequency \( f_s \) must be at least twice the highest frequency component present in the signal. \( 2 \times 10\text{kHz} = 20\text{kHz} \).</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                The DTFT of \( x[n]=\delta[n] \) is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option correct" data-opt="A">A) 1</div>
+                <div class="mcq-option" data-opt="B">B) 0</div>
+                <div class="mcq-option" data-opt="C">C) \( e^{-j\omega} \)</div>
+                <div class="mcq-option" data-opt="D">D) None</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The Discrete Time Fourier Transform of a unit impulse \( \delta[n] \) evaluates to exactly 1 across all frequencies. A sharp impulse in time contains all frequencies equally across the spectrum (which is why impulse testing is so useful for finding a system's full frequency response).</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                The Fourier transform of a signal \( x(t)=e^t u(-t) \) is given by:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) \( \frac{1}{2-j\omega} \)</div>
+                <div class="mcq-option correct" data-opt="B">B) \( \frac{1}{1-j\omega} \)</div>
+                <div class="mcq-option" data-opt="C">C) \( \frac{1}{2j-\omega} \)</div>
+                <div class="mcq-option" data-opt="D">D) \( \frac{2}{2j-\omega} \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> Using the base FT integral \( \int_{-\infty}^{0} e^t e^{-j\omega t} dt = \int_{-\infty}^{0} e^{(1-j\omega)t} dt \). Evaluating this integral at the upper bound of 0 gives \( e^0 = 1 \), yielding \( \frac{1}{1-j\omega} \).</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                Fourier transform of a rectangular pulse is a:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'C')">
+                <div class="mcq-option" data-opt="A">A) rectangular pulse</div>
+                <div class="mcq-option" data-opt="B">B) triangular pulse</div>
+                <div class="mcq-option correct" data-opt="C">C) sinc pulse</div>
+                <div class="mcq-option" data-opt="D">D) impulse function</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> A rectangular window block in the time domain mathematically transforms into the \( \text{sinc}(x) = \frac{\sin(x)}{x} \) function in the frequency domain. This is one of the most fundamental pairs in signal processing.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                Fourier transform of a real and even signal \( x(n) \) is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option correct" data-opt="A">A) real & even</div>
+                <div class="mcq-option" data-opt="B">B) real & odd</div>
+                <div class="mcq-option" data-opt="C">C) complex</div>
+                <div class="mcq-option" data-opt="D">D) imaginary</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> By the symmetry properties of the Fourier Transform, if a signal is purely real and perfectly even in the time domain, its spectrum will also be purely real and perfectly even in the frequency domain (the imaginary sine components completely cancel out).</div>
+        </div>
+
+        <h3><i class="fas fa-pen-nib"></i> Descriptive Questions (100% Comprehensive)</h3>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span><span class="badge badge-date">Supp 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the sampling frequencies \( f_s \) for: a) \( \sin(200\pi t) \), b) \( \sin^2(200\pi t) \), c) \( 1+\sin(200\pi t) \), d) \( \cos(150\pi t)\sin(100\pi t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Part (a): Linear Sine Wave</div>
+                    <div class="step-desc"><strong>Given:</strong> \( x(t) = \sin(200\pi t) \).</div>
+                    <div class="step-desc"><strong>Calculation:</strong> Compare this to the standard format \( \sin(2\pi f_{max} t) \).</div>
+                    <div class="step-desc">Equate the arguments: \( 2\pi f_{max} = 200\pi \).</div>
+                    <div class="step-desc">Divide by \( 2\pi \): \( f_{max} = 100 \) Hz.</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> Using the Nyquist formula, \( f_s \ge 2 \cdot f_{max} \). Therefore, \( f_s = 2 \cdot 100 = \mathbf{200 \text{ Hz}} \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Part (b): Squared Sine Wave (The Trap)</div>
+                    <div class="step-desc"><strong>Given:</strong> \( x(t) = \sin^2(200\pi t) \).</div>
+                    <div class="step-desc"><strong>Calculation:</strong> You cannot find the frequency of a squared waveform directly. Expand it using the trigonometric identity: \( \sin^2(\theta) = \frac{1 - \cos(2\theta)}{2} \).</div>
+                    <div class="math-block">$$x(t) = \frac{1 - \cos(2 \cdot 200\pi t)}{2} = \frac{1}{2} - \frac{1}{2}\cos(400\pi t)$$</div>
+                    <div class="step-desc">Now, compare the new oscillating term \( \cos(400\pi t) \) to \( \cos(2\pi f_{max} t) \).</div>
+                    <div class="step-desc">Equate the arguments: \( 2\pi f_{max} = 400\pi \implies f_{max} = 200 \) Hz.</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> Using Nyquist, \( f_s = 2 \cdot f_{max} = 2 \cdot 200 = \mathbf{400 \text{ Hz}} \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Part (c): Sine with DC Offset</div>
+                    <div class="step-desc"><strong>Given:</strong> \( x(t) = 1+\sin(200\pi t) \).</div>
+                    <div class="step-desc">The '1' is a constant DC component, which has a frequency of exactly 0 Hz. The sine component has a frequency of 100 Hz. The maximum frequency present in the overall signal is still 100 Hz.</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> \( f_s = 2 \cdot 100 = \mathbf{200 \text{ Hz}} \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Part (d): Multiplied Trig Functions</div>
+                    <div class="step-desc"><strong>Given:</strong> \( x(t) = \cos(150\pi t)\sin(100\pi t) \).</div>
+                    <div class="step-desc">Use the standard identity \( \cos(A)\sin(B) = \frac{1}{2}[\sin(A+B) - \sin(A-B)] \).</div>
+                    <div class="math-block">$$x(t) = \frac{1}{2}[\sin(250\pi t) - \sin(50\pi t)]$$</div>
+                    <div class="step-desc">The highest frequency component belongs to the \( 250\pi t \) term.</div>
+                    <div class="step-desc">\( 2\pi f_{max} = 250\pi \implies f_{max} = 125 \) Hz.</div>
+                    <div class="step-desc"><strong>Conclusion:</strong> \( f_s = 2 \cdot 125 = \mathbf{250 \text{ Hz}} \).</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the Fourier transform given signal and sketch the magnitude and phase spectrum for \( e^{at} \cdot u(-t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Setup the Fourier Integral</div>
+                    <div class="step-desc"><strong>Formula:</strong> \( X(j\omega) = \int_{-\infty}^{\infty} x(t)e^{-j\omega t} dt \)</div>
+                    <div class="step-desc"><strong>Applying Limits:</strong> The term \( u(-t) \) is a time-reversed step function. It is only active (equals 1) for negative time \( t < 0 \) and is completely zero for positive time. Therefore, the integration limits mathematically collapse to \( -\infty \) to \( 0 \).</div>
+                    <div class="math-block">$$X(j\omega) = \int_{-\infty}^{0} e^{at} e^{-j\omega t} dt$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 2: Combine Exponents and Integrate</div>
+                    <div class="step-desc">Combine the mathematical bases:</div>
+                    <div class="math-block">$$X(j\omega) = \int_{-\infty}^{0} e^{(a-j\omega)t} dt$$</div>
+                    <div class="step-desc">Perform the integration with respect to \( t \):</div>
+                    <div class="math-block">$$X(j\omega) = \left[ \frac{e^{(a-j\omega)t}}{a-j\omega} \right]_{-\infty}^{0}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Evaluate at Boundaries</div>
+                    <div class="step-desc">Upper limit (t=0): \( e^{(a-j\omega)(0)} = e^0 = 1 \).</div>
+                    <div class="step-desc">Lower limit (t=-\(\infty\)): Assuming \( a > 0 \), the term \( e^{a(-\infty)} \) drops completely to 0.</div>
+                    <div class="math-block">$$X(j\omega) = \frac{1 - 0}{a - j\omega} = \frac{1}{a - j\omega}$$</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 4: Magnitude and Phase Extraction</div>
+                    <div class="step-desc">Convert the complex fraction to standard magnitude and phase format.</div>
+                    <div class="step-desc"><strong>Magnitude Spectrum:</strong> \( |X(j\omega)| = \frac{1}{\sqrt{a^2 + (-\omega)^2}} = \frac{1}{\sqrt{a^2 + \omega^2}} \)</div>
+                    <div class="step-desc"><strong>Phase Spectrum:</strong> \( \angle X(j\omega) = 0 - \tan^{-1}\left(\frac{-\omega}{a}\right) = \tan^{-1}\left(\frac{\omega}{a}\right) \)</div>
+                </div>
+
+                <div class="final-answer">Final Transform: \( X(j\omega) = \frac{1}{a - j\omega} \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the Fourier transform of the sequences: i) \( x(n)=a^n u(n) \) for \( |a|<1 \), ii) \( x(n)=a^n u(-n-1) \) for \( |a|>1 \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Part (i): \( x(n)=a^n u(n) \)</div>
+                    <div class="step-desc">The Discrete Time Fourier Transform (DTFT) standard formula is \( X(e^{j\omega}) = \sum_{n=-\infty}^{\infty} x(n) e^{-j\omega n} \).</div>
+                    <div class="step-desc">Because of \( u(n) \), limits change from 0 to \( \infty \).</div>
+                    <div class="math-block">$$X(e^{j\omega}) = \sum_{n=0}^\infty a^n e^{-j\omega n} = \sum_{n=0}^\infty (ae^{-j\omega})^n$$</div>
+                    <div class="step-desc">This is an infinite geometric series with ratio \( r = ae^{-j\omega} \). Since \( |a|<1 \), it converges. Using \( S = \frac{1}{1-r} \):</div>
+                    <div class="math-block">$$X(e^{j\omega}) = \frac{1}{1 - ae^{-j\omega}}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Part (ii): \( x(n)=a^n u(-n-1) \)</div>
+                    <div class="step-desc">Because of the term \( u(-n-1) \), the signal exists only for \( n \le -1 \).</div>
+                    <div class="math-block">$$X(e^{j\omega}) = \sum_{n=-\infty}^{-1} a^n e^{-j\omega n}$$</div>
+                    <div class="step-desc">Substitute a dummy variable \( m = -n \) to change the limits to positive \( 1 \) to \( \infty \):</div>
+                    <div class="math-block">$$X(e^{j\omega}) = \sum_{m=1}^{\infty} a^{-m} e^{j\omega m} = \sum_{m=1}^{\infty} (a^{-1}e^{j\omega})^m$$</div>
+                    <div class="step-desc">The geometric series starts at index 1 (not 0), so the sum formula is \( \frac{r}{1-r} \) where \( r = a^{-1}e^{j\omega} \).</div>
+                    <div class="math-block">$$X(e^{j\omega}) = \frac{a^{-1}e^{j\omega}}{1 - a^{-1}e^{j\omega}}$$</div>
+                    <div class="step-desc">Multiply the numerator and denominator by \( a e^{-j\omega} \) to clean up the fraction:</div>
+                    <div class="math-block">$$X(e^{j\omega}) = \frac{1}{a e^{-j\omega} - 1} = \frac{-1}{1 - a e^{-j\omega}}$$</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Dec 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">If output of an LTI system to input \( x(t)=e^{-2t}u(t) \) is \( y(t)=e^{-t}u(t) \), find frequency response \( H(\omega) \) and impulse response \( h(t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Find Individual Transforms</div>
+                    <div class="step-desc">Using the standard Fourier transform pair \( e^{-at}u(t) \leftrightarrow \frac{1}{a+j\omega} \):</div>
+                    <div class="step-desc">Input FT: \( \mathcal{F}\{e^{-2t}u(t)\} \implies X(j\omega) = \frac{1}{2+j\omega} \).</div>
+                    <div class="step-desc">Output FT: \( \mathcal{F}\{e^{-t}u(t)\} \implies Y(j\omega) = \frac{1}{1+j\omega} \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 2: Find Frequency Response \( H(\omega) \)</div>
+                    <div class="step-desc">In the frequency domain, output = input &times; transfer function. So, \( H(j\omega) = \frac{Y(j\omega)}{X(j\omega)} \).</div>
+                    <div class="math-block">$$H(j\omega) = \frac{\frac{1}{1+j\omega}}{\frac{1}{2+j\omega}} = \frac{2+j\omega}{1+j\omega}$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Find Impulse Response \( h(t) \)</div>
+                    <div class="step-desc">To find the inverse Fourier transform, we must rewrite the improper fraction using algebraic manipulation. Add and subtract 1 in the numerator:</div>
+                    <div class="math-block">$$H(j\omega) = \frac{1 + 1 + j\omega}{1+j\omega} = \frac{1+j\omega}{1+j\omega} + \frac{1}{1+j\omega} = 1 + \frac{1}{1+j\omega}$$</div>
+                    <div class="step-desc">Now take the inverse Fourier transform of each part separately. The inverse of a constant 1 is the delta function \( \delta(t) \).</div>
+                </div>
+                
+                <div class="final-answer">\( h(t) = \delta(t) + e^{-t}u(t) \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2023</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Let \( x(n) \) be a sequence \( \{1,2,4,0,1,-2,2\} \) with \( x(0)=4 \). Evaluate \( X(e^{j0}) \) and \( \int_{-\pi}^{\pi} X(e^{j\omega})d\omega \) without computing the transform itself.</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Signal Bounds</div>
+                    <div class="step-desc">If \( x(0) = 4 \), the sequence indices are:</div>
+                    <div class="step-desc">\( x(-2)=1, x(-1)=2, x(0)=4, x(1)=0, x(2)=1, x(3)=-2, x(4)=2 \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 2: Evaluate \( X(e^{j0}) \)</div>
+                    <div class="step-desc">By definition, \( X(e^{j\omega}) = \sum x(n)e^{-j\omega n} \).</div>
+                    <div class="step-desc">If \( \omega = 0 \), the exponential term becomes \( e^0 = 1 \). Therefore, \( X(e^{j0}) \) is simply the sum of all elements in the sequence.</div>
+                    <div class="math-block">$$X(e^{j0}) = \sum x(n) = 1 + 2 + 4 + 0 + 1 - 2 + 2 = 8$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Evaluate Integral</div>
+                    <div class="step-desc">The inverse DTFT formula states that \( x(n) = \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\omega})e^{j\omega n} d\omega \).</div>
+                    <div class="step-desc">If we evaluate this at \( n=0 \), the exponential term becomes \( e^0 = 1 \):</div>
+                    <div class="math-block">$$x(0) = \frac{1}{2\pi} \int_{-\pi}^{\pi} X(e^{j\omega}) d\omega$$</div>
+                    <div class="step-desc">Rearranging to solve for the integral:</div>
+                    <div class="math-block">$$\int_{-\pi}^{\pi} X(e^{j\omega}) d\omega = 2\pi \cdot x(0)$$</div>
+                    <div class="step-desc">Since we know \( x(0) = 4 \):</div>
+                    <div class="math-block">$$\int_{-\pi}^{\pi} X(e^{j\omega}) d\omega = 2\pi \cdot 4 = 8\pi$$</div>
+                </div>
+            </div></div>
+        </div>
+    </div>
+
+    <div id="unit5" class="unit-content">
+        <h2>Unit 5: Laplace & Z-Transforms</h2>
+        
+        <div class="card important">
+            <h3><i class="fas fa-star"></i> High Priority Topics for 10-CGPA</h3>
+            <ul>
+                <li><strong>ROC Analysis (Partial Fractions):</strong> Absolutely mandatory 9-mark question. Must know how to build causal, anticausal, and non-causal signals from the exact same transfer function by checking the poles.</li>
+                <li><strong>Inverse Z-Transform:</strong> Focus on utilizing shifting properties \( z^{-1} \implies u[n-1] \).</li>
+            </ul>
+        </div>
+
+        <div class="card formula">
+            <h3><i class="fas fa-calculator"></i> Complete Formula Sheet</h3>
+            <ul>
+                <li><strong>Laplace Transform Eq:</strong> <span class="math-inline math-block-sm">$$X(s) = \int_{-\infty}^{\infty} x(t)e^{-st} dt$$</span></li>
+                <li><strong>Z-Transform Eq:</strong> <span class="math-inline math-block-sm">$$X(z) = \sum_{n=-\infty}^{\infty} x[n]z^{-n}$$</span></li>
+                <li><strong>Time Multiplication (Laplace):</strong> <span class="math-inline">\( t x(t) \leftrightarrow -\frac{d}{ds}X(s) \)</span>. If a signal is multiplied by 't', take the negative derivative of its s-domain transform.</li>
+                <li><strong>Common Pair:</strong> <span class="math-inline">\( e^{-at}u(t) \leftrightarrow \frac{1}{s+a} \)</span></li>
+            </ul>
+        </div>
+        
+        <div class="card trap">
+            <h3><i class="fas fa-lightbulb"></i> Exam Tips & Examiner Traps</h3>
+            <ul>
+                <li><strong>The ROC Exclusion Rule:</strong> The Region of Convergence (ROC) can NEVER contain a pole. When you find poles (e.g., -2 and -3), the ROC must either be greater than both (Causal), less than both (Anticausal), or between them (Non-causal). The exact same transfer function equation can produce three completely different time signals depending solely on the ROC bounds given.</li>
+            </ul>
+        </div>
+
+        <h3><i class="fas fa-mouse-pointer"></i> Objective Questions</h3>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                ROC of \( X(s) \) contains:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'D')">
+                <div class="mcq-option" data-opt="A">A) zeros</div>
+                <div class="mcq-option" data-opt="B">B) poles</div>
+                <div class="mcq-option" data-opt="C">C) no zero</div>
+                <div class="mcq-option correct" data-opt="D">D) no pole</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> A "pole" is a root value of the denominator that causes the mathematical transfer function to evaluate to infinity (meaning it fails to converge). Because the ROC (Region of Convergence) strictly defines the area where the function is finite, it can mathematically never encompass a pole.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                The Laplace Transform is a generalization of:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'A')">
+                <div class="mcq-option correct" data-opt="A">A) Fourier Transform</div>
+                <div class="mcq-option" data-opt="B">B) Z-Transform</div>
+                <div class="mcq-option" data-opt="C">C) Convolution</div>
+                <div class="mcq-option" data-opt="D">D) None</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The Laplace transform variable is \( s = \sigma + j\omega \). The Fourier transform variable is simply \( j\omega \). The Laplace transform is literally the Fourier transform but with an added real exponential convergence factor (\( \sigma \)) to handle unstable signals that explode to infinity. If you set \( \sigma = 0 \), Laplace perfectly collapses into the Fourier transform.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                What is the Laplace Transform of \( \delta(t) \)?
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) 0</div>
+                <div class="mcq-option correct" data-opt="B">B) 1</div>
+                <div class="mcq-option" data-opt="C">C) \( s \)</div>
+                <div class="mcq-option" data-opt="D">D) -1</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> By the integral definition \( \int \delta(t)e^{-st} dt \). Since the impulse \( \delta(t) \) only exists at exactly t=0, the integral simply evaluates the rest of the function at t=0. Thus, \( e^{-s(0)} = e^0 = 1 \).</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                Laplace transform converts convolution of time signals to:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'C')">
+                <div class="mcq-option" data-opt="A">A) addition</div>
+                <div class="mcq-option" data-opt="B">B) subtraction</div>
+                <div class="mcq-option correct" data-opt="C">C) multiplication</div>
+                <div class="mcq-option" data-opt="D">D) division</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> Just like the Fourier Transform, the Laplace Transform obeys the Convolution Theorem: \( x(t) * h(t) \leftrightarrow X(s) \cdot H(s) \). Complex time-domain integration becomes simple s-domain algebra.</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Winter 2024</span></div>
+                The z-transform of \( \delta(n-m) \) is:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) \( z \)</div>
+                <div class="mcq-option correct" data-opt="B">B) \( z^{-m} \)</div>
+                <div class="mcq-option" data-opt="C">C) \( z^m \)</div>
+                <div class="mcq-option" data-opt="D">D) \( \frac{1}{z-m} \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The time-shifting property of the Z-transform states that delaying a signal by 'm' samples corresponds to multiplying its Z-transform by \( z^{-m} \). Since the ZT of \( \delta(n) = 1 \), the ZT of \( \delta(n-m) = 1 \cdot z^{-m} \).</div>
+        </div>
+
+        <div class="mcq-container">
+            <div class="mcq-question">
+                <div class="mcq-meta"><span class="badge badge-obj">1 Mark</span><span class="badge badge-date">Summer 2025</span></div>
+                The convolution of \( x(t) \) with \( \delta(t) \) gives:
+            </div>
+            <div class="mcq-options" onclick="revealMCQ(this, 'B')">
+                <div class="mcq-option" data-opt="A">A) \( \delta(t) \)</div>
+                <div class="mcq-option correct" data-opt="B">B) \( x(t) \)</div>
+                <div class="mcq-option" data-opt="C">C) \( x(t-1) \)</div>
+                <div class="mcq-option" data-opt="D">D) \( x(0) \)</div>
+            </div>
+            <div class="mcq-reason"><strong>Detailed Reason:</strong> The impulse function acts as the mathematical identity element under the operation of convolution. Convolving any signal with a delta function at the origin simply returns the original signal unchanged.</div>
+        </div>
+
+        <h3><i class="fas fa-pen-nib"></i> Descriptive Questions (100% Comprehensive)</h3>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">9 Marks</span><span class="badge badge-date">Supp 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">For \( H(s) = \frac{1}{s^2+5s+6} \), find \( h(t) \) for 1) \( \text{Re}\{s\} > -2 \), 2) \( \text{Re}\{s\} < -3 \), 3) \( -3 < \text{Re}\{s\} < -2 \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="concept-box">
+                    <strong>Simplified Concept:</strong> The exact same \( H(s) \) equation can create three completely different time signals depending on the ROC. If ROC is > a pole, that part is a standard positive decaying signal. If ROC is < a pole, that part is a negative anti-causal signal.
+                </div>
+                <div class="step">
+                    <div class="step-title">Step 1: Partial Fraction Expansion</div>
+                    <div class="step-desc"><strong>Given:</strong> \( H(s) = \frac{1}{s^2+5s+6} \).</div>
+                    <div class="step-desc">Factor the denominator into its roots: \( s^2 + 5s + 6 = (s+2)(s+3) \).</div>
+                    <div class="math-block">$$H(s) = \frac{1}{(s+2)(s+3)} = \frac{A}{s+2} + \frac{B}{s+3}$$</div>
+                    <div class="step-desc">Solve for A using the Cover-Up Method (cover \( s+2 \), set \( s = -2 \)): \( A = \frac{1}{-2+3} = 1 \).</div>
+                    <div class="step-desc">Solve for B using the Cover-Up Method (cover \( s+3 \), set \( s = -3 \)): \( B = \frac{1}{-3+2} = -1 \).</div>
+                    <div class="math-block">$$H(s) = \frac{1}{s+2} - \frac{1}{s+3}$$</div>
+                    <div class="step-desc">The system has two poles: \( p_1 = -2 \) and \( p_2 = -3 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Case 1: ROC is \( \text{Re}\{s\} > -2 \)</div>
+                    <div class="step-desc">The region of convergence is strictly to the right of the right-most pole (-2). Because it is greater than all poles, every component of the signal is right-sided (causal) and requires \( u(t) \).</div>
+                    <div class="math-block">$$h(t) = e^{-2t}u(t) - e^{-3t}u(t)$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Case 2: ROC is \( \text{Re}\{s\} < -3 \)</div>
+                    <div class="step-desc">The region of convergence is strictly to the left of the left-most pole (-3). Because it is less than all poles, every component of the signal is left-sided (anticausal) and requires \( -u(-t) \).</div>
+                    <div class="math-block">$$h(t) = -(e^{-2t}u(-t)) - (-e^{-3t}u(-t))$$</div>
+                    <div class="math-block">$$h(t) = -e^{-2t}u(-t) + e^{-3t}u(-t)$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Case 3: ROC is \( -3 < \text{Re}\{s\} < -2 \)</div>
+                    <div class="step-desc">The region of convergence lies exactly between the two poles.</div>
+                    <div class="step-desc">- It is to the left of -2 (so the \( \frac{1}{s+2} \) component is anticausal: \( -u(-t) \)).</div>
+                    <div class="step-desc">- It is to the right of -3 (so the \( \frac{1}{s+3} \) component is causal: \( u(t) \)).</div>
+                    <div class="math-block">$$h(t) = -e^{-2t}u(-t) - e^{-3t}u(t)$$</div>
+                </div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find the Laplace transform of \( x(t) = t \cdot e^{-2t} u(t) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Identify Base Transform</div>
+                    <div class="step-desc">Ignore the 't' multiplier first. Focus on the standard base Laplace transform for the exponential function \( e^{-at}u(t) \), which is \( \frac{1}{s+a} \).</div>
+                    <div class="math-block">$$\mathcal{L}\{e^{-2t}u(t)\} = \frac{1}{s+2}$$</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Apply the Time Multiplication Property</div>
+                    <div class="step-desc">The specific Laplace property states that multiplying a time-domain signal by \( t \) corresponds mathematically to taking the negative derivative of its Laplace transform with respect to \( s \).</div>
+                    <div class="math-block">$$\mathcal{L}\{t \cdot x(t)\} = -\frac{d}{ds}X(s)$$</div>
+                    <div class="step-desc">Substitute our base transform into the property equation:</div>
+                    <div class="math-block">$$X(s) = -\frac{d}{ds} \left[ \frac{1}{s+2} \right]$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Perform Differentiation</div>
+                    <div class="step-desc">Use the chain rule or power rule. The derivative of \( (s+2)^{-1} \) is \( -1 \cdot (s+2)^{-2} \).</div>
+                    <div class="math-block">$$X(s) = -\left( \frac{-1}{(s+2)^2} \right) = \frac{1}{(s+2)^2}$$</div>
+                </div>
+
+                <div class="final-answer">Final Answer: \( X(s) = \frac{1}{(s+2)^2} \), with ROC \( \text{Re}\{s\} > -2 \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Winter 2024</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find inverse z-transform of \( X(z) = \frac{1 + \frac{1}{3}z^{-1}}{1 - \frac{1}{3}z^{-1}} \) for \( |z| > 1/3 \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Separate the Transfer Function</div>
+                    <div class="step-desc">Split the numerator to handle the terms individually using linearity:</div>
+                    <div class="math-block">$$X(z) = \frac{1}{1 - \frac{1}{3}z^{-1}} + \frac{\frac{1}{3}z^{-1}}{1 - \frac{1}{3}z^{-1}}$$</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Determine System Causality</div>
+                    <div class="step-desc">The single pole is located at \( z = 1/3 \). Since the given ROC is \( |z| > 1/3 \), it is strictly exterior to the pole circle. This mathematically guarantees the system is completely right-sided (Causal), so all inverse transforms will be multiplied by \( u[n] \).</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Apply Inverse Transforms</div>
+                    <div class="step-desc"><strong>First Term:</strong> The standard pair format \( \frac{1}{1-az^{-1}} \leftrightarrow a^n u(n) \).</div>
+                    <div class="math-block">$$\mathcal{Z}^{-1} \left\{ \frac{1}{1 - \frac{1}{3}z^{-1}} \right\} = \left(\frac{1}{3}\right)^n u[n]$$</div>
+                    <div class="step-desc"><strong>Second Term:</strong> This is exactly the first term multiplied by \( \frac{1}{3}z^{-1} \). Multiplying by \( z^{-1} \) simply delays the signal by 1 unit in the time domain (Time Shifting property).</div>
+                    <div class="math-block">$$\mathcal{Z}^{-1} \left\{ \frac{1}{3}z^{-1} \cdot \frac{1}{1 - \frac{1}{3}z^{-1}} \right\} = \frac{1}{3} \cdot \left(\frac{1}{3}\right)^{n-1} u[n-1]$$</div>
+                </div>
+
+                <div class="final-answer">Final Output: \( x[n] = \left(\frac{1}{3}\right)^n u[n] + \left(\frac{1}{3}\right)^n u[n-1] \)</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Summer 2025</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Determine the z-transform and ROC for \( (0.5)^n \{u(n+4) - u(n-5)\} \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Step 1: Identify Signal Boundaries</div>
+                    <div class="step-desc">The sequence \( u(n+4) - u(n-5) \) creates a rectangular window. The signal "turns on" at \( n = -4 \) and "turns off" just before \( n = 5 \) (meaning the last active index is 4). Thus, the signal only exists for the finite interval: \( n = -4, -3, \dots, 3, 4 \).</div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-title">Step 2: Setup Z-Transform Summation</div>
+                    <div class="step-desc">Substitute the finite limits into the general Z-Transform definition:</div>
+                    <div class="math-block">$$X(z) = \sum_{n=-4}^{4} (0.5)^n z^{-n} = \sum_{n=-4}^{4} (0.5 z^{-1})^n$$</div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title">Step 3: Analyze the ROC</div>
+                    <div class="step-desc">Because the summation is finite, we do not have to worry about infinite series convergence. However, we must mathematically check where the individual terms blow up to infinity.</div>
+                    <div class="step-desc">- The summation contains positive powers of z (e.g., \( z^4 \) when n=-4). This blows up if \( z = \infty \).</div>
+                    <div class="step-desc">- The summation contains negative powers of z (e.g., \( z^{-4} = \frac{1}{z^4} \) when n=4). This blows up if \( z = 0 \).</div>
+                    <div class="step-desc">Therefore, the function converges everywhere on the complex plane except at exactly zero and exactly infinity.</div>
+                </div>
+
+                <div class="final-answer">Final Answer: The Z-Transform is the finite sum \( \sum_{n=-4}^{4} (0.5 z^{-1})^n \). The ROC is the entire Z-plane except \( z = 0 \) and \( z = \infty \).</div>
+            </div></div>
+        </div>
+
+        <div class="pyq-accordion">
+            <button class="pyq-btn">
+                <div class="pyq-header-row"><div class="badge-container"><span class="badge badge-marks">6 Marks</span><span class="badge badge-date">Dec 2022</span></div><span class="icon">+</span></div>
+                <div class="pyq-title">Find ZT and ROC of: 1) \( \delta(n) \), 2) \( \delta(n-k) \), 3) \( a^n u(n) \), 4) \( u(n)-u(n-10) \).</div>
+            </button>
+            <div class="solution-panel"><div class="solution-content">
+                <div class="step">
+                    <div class="step-title">Standard Transforms Breakdown</div>
+                    <div class="step-desc"><strong>1) Unit Impulse \( \delta(n) \):</strong></div>
+                    <div class="step-desc">Formula: \( \sum \delta(n)z^{-n} \). Since it only exists at n=0, \( z^0 = 1 \).</div>
+                    <div class="step-desc"><strong>ROC:</strong> Entire z-plane.</div>
+                    <br>
+                    <div class="step-desc"><strong>2) Delayed Impulse \( \delta(n-k) \):</strong></div>
+                    <div class="step-desc">Only exists at n=k. Substitute n=k into summation to get \( z^{-k} \).</div>
+                    <div class="step-desc"><strong>ROC:</strong> Entire z-plane except \( z=0 \) (if k > 0).</div>
+                    <br>
+                    <div class="step-desc"><strong>3) Exponential \( a^n u(n) \):</strong></div>
+                    <div class="step-desc">Formula: \( \sum_{n=0}^\infty (az^{-1})^n = \frac{1}{1-az^{-1}} \).</div>
+                    <div class="step-desc"><strong>ROC:</strong> \( |z| > |a| \).</div>
+                    <br>
+                    <div class="step-desc"><strong>4) Finite Window \( u(n)-u(n-10) \):</strong></div>
+                    <div class="step-desc">Finite sequence of 1s from n=0 to 9. Sum is \( \sum_{n=0}^9 z^{-n} = \frac{1 - z^{-10}}{1 - z^{-1}} \).</div>
+                    <div class="step-desc"><strong>ROC:</strong> Entire z-plane except \( z=0 \).</div>
+                </div>
+            </div></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Set Default Light Mode on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            // Ensure no dark mode class is set on load
+            body.classList.remove('dark-mode');
+        });
+
+        // Light / Dark Theme Toggler
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                btn.innerHTML = '<i class="fas fa-sun"></i> Switch to Light Mode';
+                btn.style.background = "var(--panel-bg)";
+                btn.style.color = "var(--primary)";
+                btn.style.border = "2px solid var(--primary)";
+            } else {
+                btn.innerHTML = '<i class="fas fa-moon"></i> Switch to Dark Mode';
+                btn.style.background = "var(--primary)";
+                btn.style.color = "white";
+                btn.style.border = "none";
+            }
+        }
+
+        // Unit Tab Switcher
+        function openUnit(evt, unitId) {
+            let contents = document.getElementsByClassName("unit-content");
+            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+            
+            let btns = document.getElementsByClassName("unit-btn");
+            for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+            
+            document.getElementById(unitId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // Scroll to center for mobile navigation
+            evt.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        // Accordion Logic
+        let acc = document.getElementsByClassName("pyq-btn");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                let panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + 800 + "px"; // 800px buffer for rendering math
+                }
+            });
+        }
+        
+        // Interactive MCQ Logic
+        function revealMCQ(container, correctOpt) {
+            // Prevent clicking again if already revealed
+            if(container.classList.contains('revealed')) return;
+            
+            let options = container.querySelectorAll('.mcq-option');
+            let reasonBox = container.nextElementSibling;
+            
+            options.forEach(opt => {
+                let val = opt.getAttribute('data-opt');
+                if (val === correctOpt) {
+                    opt.classList.add('correct-reveal');
+                } else {
+                    opt.classList.add('wrong-reveal');
+                }
+            });
+            
+            reasonBox.style.display = "block";
+            container.classList.add('revealed');
+        }
+    </script>
+</body>
+</html>
